@@ -1,0 +1,5 @@
+# Project exclude paths
+/trains-gdx-android/target/
+/trains-gdx-core/target/
+/trains-gdx-desktop/target/
+/trains-gdx-html/target/
