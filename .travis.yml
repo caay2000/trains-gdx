@@ -1,0 +1,8 @@
+language: java
+addons:
+  sonarcloud:
+    organization: caay2000-github
+    token:
+      secure: "qjyLw4DSI9mEynQKLdaAxZ2k0wcr3yd0v28ITZ0J2DwC9zXnx3yy2t9bspXlV9wG1SOaHzUdojfAiE3eAPI6D1zLoQC3EgbKgH92GdaUqvvn4WnW6LS+E6QTwsnyXWZmNf3jT7YpXeM1B1KSa90f6/hVqRmSkXQupQjy+nBmAYpI+/aeSpYmNsXjBCzi4VIWRM4N3yXCbRUcXYPI+9LfDOF8X8st/9NYQLSWyhaPc4HvGfAb7Tu7U068Oy5jSivGn194/Os2vXA8N7ZHnI4vi/RsYS8nbxXEH0NpzO6e7E6BWOKr1t5JjClZQJbm9wL7fIy0/dv4sfr2Qp97rRaKHJ5a+uWpVKJkZS3siQpEWGUMfgQDig/o+0DrhN/kcmMS7pFRhfnnBoglJ1rCFSqIDnVkFq14SxBWBaH25fBxS9kOMWJ5OS73VQzpQMG9lVRrOGEm/UAQVpOFDVXU37Zmcv2LDMFk0Za3lMdmKmWFZCl2uckVmtyileho0SPrHQuMpygT56H/UX414U3VHxkAEnAgsMprMkO3Fh1r4QjjqUhJyVHZbKBOoxHHBzumyOPkqRupdwi1vDXxv+iPUmTY88f2pwbKlu6xWagnE9VZjA6d7vKaWfzfo/ijWQ9HNNJObIeZj6y3vGIDhdJ6yis2MMds0idj+0B9mddx2l3EHIQ="
+script:
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=caay2000_trains-gdx
