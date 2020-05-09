@@ -25,6 +25,14 @@ public class Position {
         this.vec2d = new Vector2(x, y);
     }
 
+    public float getX() {
+        return vec2d.x;
+    }
+
+    public float getY() {
+        return vec2d.y;
+    }
+
     public Position move(Position to, float distance) {
         if (distance > vec2d.dst(to.vec2d)) {
             return new Position(to.vec2d);
