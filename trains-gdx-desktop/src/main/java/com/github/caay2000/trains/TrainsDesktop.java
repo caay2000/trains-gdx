@@ -7,8 +7,8 @@ public class TrainsDesktop {
 	public static void main (String[] args) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 
-		config.height = 1000;
-		config.width = 1000;
+		config.height = 1200;
+		config.width = 1080;
 
 
 		new LwjglApplication(new SimpleTest(), config);

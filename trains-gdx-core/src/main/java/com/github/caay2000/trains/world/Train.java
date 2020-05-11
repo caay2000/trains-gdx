@@ -1,4 +1,6 @@
-package com.github.caay2000.trains;
+package com.github.caay2000.trains.world;
+
+import com.github.caay2000.trains.common.Position;
 
 public class Train {
 
@@ -8,7 +10,7 @@ public class Train {
 
     public Train(Route route, double speed) {
         this.route = route;
-        this.position = route.getStart();
+        this.position = new Position(route.getStart().getPosition());
         this.speed = speed;
     }
 
@@ -26,16 +28,15 @@ public class Train {
 
     public void move(float elapsed) {
         updatePosition(elapsed);
-        System.out.println(position);
     }
 
     private void updatePosition(float elapsed) {
-        float distance = position.distanceTo(route.getEnd());
+        float distance = position.distanceTo(route.getEnd().getPosition());
         if (speed * elapsed > distance) {
             calculateNextRoute();
             elapsed = calculateElpsedMissing(elapsed, distance);
         }
-        position = position.move(route.getEnd(), (float) (elapsed * speed));
+        position = position.move(route.getEnd().getPosition(), (float) (elapsed * speed));
     }
 
     private float calculateElpsedMissing(float elapsed, float distance) {
@@ -45,7 +46,7 @@ public class Train {
     }
 
     private void calculateNextRoute() {
-        position = route.getEnd();
+        position = new Position(route.getEnd().getPosition());
         route = new Route(route.getEnd(), route.getStart());
     }
 
