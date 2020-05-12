@@ -1,43 +1,44 @@
 package com.github.caay2000.trains.world
 
-import com.github.caay2000.trains.world.aaa.Position
-import com.github.caay2000.trains.world.aaa.Route
+class Train : Entity {
 
-class Train(var route: Route, speed: Double) {
+    override val position: Position
+    private val speed: Float
+    private var route: Route
 
-    var position: Position
-        private set
-    val speed: Double
+    constructor(speed: Float, route: Route) {
+        this.position = Position(route.start.position)
+        this.speed = speed
+        this.route = route
+    }
 
-    fun move(elapsed: Float) {
-        updatePosition(elapsed)
+    override fun update(delta: Float) {
+        this.updatePosition(speed * delta)
+    }
+
+    private fun move(to: Location, distance: Float) {
     }
 
     private fun updatePosition(elapsed: Float) {
         var elapsed = elapsed
-        val distance = position.distanceTo(route.end.position())
+        val distance = position.distanceTo(route.end.position)
         if (speed * elapsed > distance) {
             calculateNextRoute()
-            elapsed = calculateElpsedMissing(elapsed, distance)
+            elapsed = calculateElapsedMissing(elapsed, distance)
         }
-        position.move(route.end.position(), (elapsed * speed).toFloat())
+        position.move(route.end.position, elapsed * speed)
     }
 
-    private fun calculateElpsedMissing(elapsed: Float, distance: Float): Float {
+    private fun calculateElapsedMissing(elapsed: Float, distance: Float): Float {
         var elapsed = elapsed
         var distance = distance
-        distance = (elapsed * speed).toFloat() - distance
-        elapsed = elapsed * distance / (speed * elapsed).toFloat()
+        distance = (elapsed * speed) - distance
+        elapsed = elapsed * distance / (speed * elapsed)
         return elapsed
     }
 
     private fun calculateNextRoute() {
-        position = Position(route.end.position())
+        position.translate(route.end.position)
         route = Route(route.end, route.start)
-    }
-
-    init {
-        position = Position(route.start.position())
-        this.speed = speed
     }
 }

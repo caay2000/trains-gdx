@@ -8,7 +8,7 @@ object TrainsDesktop {
     fun main(args: Array<String>) {
         val config = LwjglApplicationConfiguration()
         config.height = 1200
-        config.width = 1080
+        config.width = 1600
         LwjglApplication(SimpleTest(), config)
     }
 }
