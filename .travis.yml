@@ -1,4 +1,7 @@
-language: kotlin
+dist: trusty
+language: java
+jdk:
+  - openjdk11
 addons:
   sonarcloud:
     organization: caay2000-github
