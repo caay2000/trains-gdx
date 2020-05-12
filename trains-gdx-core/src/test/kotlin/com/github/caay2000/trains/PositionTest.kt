@@ -1,6 +1,6 @@
 package com.github.caay2000.trains
 
-import com.github.caay2000.trains.common.Position
+import com.github.caay2000.trains.world.aaa.Position
 import org.assertj.core.api.Assertions
 import org.junit.Test
 

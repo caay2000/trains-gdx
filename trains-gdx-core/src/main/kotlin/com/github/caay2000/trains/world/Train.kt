@@ -1,8 +1,10 @@
 package com.github.caay2000.trains.world
 
-import com.github.caay2000.trains.common.Position
+import com.github.caay2000.trains.world.aaa.Position
+import com.github.caay2000.trains.world.aaa.Route
 
 class Train(var route: Route, speed: Double) {
+
     var position: Position
         private set
     val speed: Double
@@ -13,12 +15,12 @@ class Train(var route: Route, speed: Double) {
 
     private fun updatePosition(elapsed: Float) {
         var elapsed = elapsed
-        val distance = position.distanceTo(route.end?.position!!)
+        val distance = position.distanceTo(route.end.position())
         if (speed * elapsed > distance) {
             calculateNextRoute()
             elapsed = calculateElpsedMissing(elapsed, distance)
         }
-        position = position.move(route.end?.position!!, (elapsed * speed).toFloat())
+        position.move(route.end.position(), (elapsed * speed).toFloat())
     }
 
     private fun calculateElpsedMissing(elapsed: Float, distance: Float): Float {
@@ -30,12 +32,12 @@ class Train(var route: Route, speed: Double) {
     }
 
     private fun calculateNextRoute() {
-        position = Position(route.end?.position!!)
+        position = Position(route.end.position())
         route = Route(route.end, route.start)
     }
 
     init {
-        position = Position(route.start?.position!!)
+        position = Position(route.start.position())
         this.speed = speed
     }
 }

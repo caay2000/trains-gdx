@@ -1,19 +1,19 @@
 package com.github.caay2000.trains.world
 
 import com.github.caay2000.trains.util.RandomGenerator
-import java.util.*
-import java.util.function.Predicate
-import java.util.stream.Collectors
+import com.github.caay2000.trains.world.aaa.City
+import com.github.caay2000.trains.world.aaa.Route
+import java.util.HashSet
 
 class World(configuration: WorldConfiguration?) {
     val size: WorldSize
-    val cities: Set<City?>?
+    val cities: Set<City>
     private val connectedCities: MutableSet<City> = HashSet()
     private val routes: MutableSet<Route> = HashSet<Route>()
     private val trains: MutableSet<Train> = HashSet()
     private var elapsed = 0f
 
-    fun getRoutes(): Set<Route?> {
+    fun getRoutes(): Set<Route> {
         return routes
     }
 
@@ -30,7 +30,7 @@ class World(configuration: WorldConfiguration?) {
     }
 
     private fun generateNewRoute() {
-        if (connectedCities.size == cities!!.size) {
+        if (connectedCities.size == cities.size) {
             return
         }
         val startCity: City
@@ -42,12 +42,12 @@ class World(configuration: WorldConfiguration?) {
                 return
             }
             RandomGenerator.randomItem(list)
-        })!!
+        })
 
-        val possibleRoutes = startCity.getCitiesInRange(cities)
-        val collect: Set<City?> = possibleRoutes
-                .filter{ e -> e!!.isNotConnected }
-                .toSet()
+        val possibleRoutes = startCity.getCitiesInRange()
+        val collect: Set<City> = possibleRoutes
+            .filter { city -> !city.connected() }
+            .toSet()
         if (collect.size == 0) {
             return
         }

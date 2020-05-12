@@ -30,15 +30,15 @@ class WorldRender {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled)
         for (city in world.cities!!) {
             shapeRenderer.circle(
-                    city!!.position.x + xOffset(world),
-                    city.position.y + yOffset(world),
-                    city.population / 1000 + 1.toFloat())
+                    city.position().x + xOffset(world),
+                    city.position().y + yOffset(world),
+                    city.population() / 1000 + 1.toFloat())
         }
         for (route in world.getRoutes()) {
-            shapeRenderer.line(route!!.start!!.position.x + xOffset(world),
-                    route.start!!.position.y + yOffset(world),
-                    route.end!!.position.x + xOffset(world),
-                    route.end!!.position.y + yOffset(world))
+            shapeRenderer.line(route!!.start.position().x + xOffset(world),
+                    route.start.position().y + yOffset(world),
+                    route.end.position().x + xOffset(world),
+                    route.end.position().y + yOffset(world))
         }
         shapeRenderer.color = Color.RED
         for (train in world.getTrains()) {
