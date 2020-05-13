@@ -212,13 +212,6 @@
                     <configuration>
                         <threads>8</threads>
                         <failWhenNoMutations>false</failWhenNoMutations>
-<!--                        <detectInlinedCode>true</detectInlinedCode>-->
-<!--                        <targetClasses>-->
-<!--                            <param>com.github.caay2000.*</param>-->
-<!--                        </targetClasses>-->
-<!--                        <targetTests>-->
-<!--                            <param>com.github.caay2000.*</param>-->
-<!--                        </targetTests>-->
                         <excludedClasses>
                             <param>**.*Configuration</param>
                             <param>**.configuration.**</param>

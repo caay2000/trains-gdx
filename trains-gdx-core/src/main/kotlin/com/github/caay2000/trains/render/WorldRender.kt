@@ -7,16 +7,17 @@ import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.github.caay2000.trains.world.World
+import kotlin.math.abs
 
 class WorldRender {
 
     private val screenMargin = 50
-    private val shapeRenderer: ShapeRenderer
-    private val batch: SpriteBatch
-    private val camera: OrthographicCamera
-    var width = 800f
-    var height: Float
-    var aspectRatio: Float
+    private val shapeRenderer: ShapeRenderer = ShapeRenderer()
+    private val batch: SpriteBatch = SpriteBatch()
+    private val camera: OrthographicCamera = OrthographicCamera()
+    private var width = 800f
+    private var height: Float
+    private var aspectRatio: Float = Gdx.graphics.height.toFloat() / Gdx.graphics.width.toFloat()
 
     fun render(world: World) {
         camera.update()
@@ -38,7 +39,7 @@ class WorldRender {
         for (company in world.companies()) {
             for (route in company.routes()) {
                 shapeRenderer.line(
-                    route!!.start.position.x + xOffset(world),
+                    route.start.position.x + xOffset(world),
                     route.start.position.y + yOffset(world),
                     route.end.position.x + xOffset(world),
                     route.end.position.y + yOffset(world)
@@ -56,19 +57,15 @@ class WorldRender {
         shapeRenderer.end()
     }
 
-    fun xOffset(world: World): Int {
-        return Math.abs(world.minX()) + screenMargin
+    private fun xOffset(world: World): Int {
+        return abs(world.minX()) + screenMargin
     }
 
-    fun yOffset(world: World): Int {
-        return Math.abs(world.minY()) + screenMargin
+    private fun yOffset(world: World): Int {
+        return abs(world.minY()) + screenMargin
     }
 
     init {
-        shapeRenderer = ShapeRenderer()
-        batch = SpriteBatch()
-        camera = OrthographicCamera()
-        aspectRatio = Gdx.graphics.height.toFloat() / Gdx.graphics.width.toFloat()
         height = width * aspectRatio
         camera.position[width / 2, height / 2] = 0f
         camera.viewportWidth = width / 2

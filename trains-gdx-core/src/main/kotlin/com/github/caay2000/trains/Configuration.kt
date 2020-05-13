@@ -8,6 +8,4 @@ object Configuration {
     var minCityPopulation = 100
     var maxCityPopulation = 5000
     var maxRouteDistanceBetweenCities = 100
-
-    // val maxDistanceBetweenCitiesValue = hypot(maxDistanceBetweenCities.toDouble(), minDistanceBetweenCities.toDouble())
 }

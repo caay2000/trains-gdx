@@ -31,12 +31,12 @@ class Position {
 
     fun move(to: Position, distance: Float) {
         if (distance <= this.distanceTo(to)) {
-            var diff = this.copy().vec2d.sub(to.vec2d).nor()
+            val diff = this.copy().vec2d.sub(to.vec2d).nor()
             this.vec2d.mulAdd(diff.scl(-1f), distance)
         } else this.translate(to)
     }
 
-    fun translate(position: Position): Unit {
+    fun translate(position: Position) {
         this.vec2d.set(position.x, position.y)
     }
 
