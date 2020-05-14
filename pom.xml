@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.caay2000</groupId>
     <artifactId>trains-gdx</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>20200515</version>
     <packaging>pom</packaging>
     <name>Trains GDX Parent</name>
 
@@ -19,7 +19,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <maven-source-plugin.version>3.1.0</maven-source-plugin.version>
-        <maven-compiler-plugin>2.5.1</maven-compiler-plugin>
+        <maven-compiler-plugin.version>2.5.1</maven-compiler-plugin.version>
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven-surefire.version>2.22.1</maven-surefire.version>
@@ -174,7 +174,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven-compiler-plugin}</version>
+                <version>${maven-compiler-plugin.version}</version>
             </plugin>
         </plugins>
         <pluginManagement>
