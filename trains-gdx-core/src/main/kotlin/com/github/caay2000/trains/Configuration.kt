@@ -13,4 +13,6 @@ object Configuration {
     var cityRatioGrowingPopulationNotConnected = 0.0001f
     var cityRatioPopulationPAX = 0.0001f
     var cityMaxRatioPAXPopulation = 0.5
+
+    var stationStopTime = 2
 }
