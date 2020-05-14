@@ -43,6 +43,12 @@
             <version>${kotlin.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>io.github.libktx</groupId>
+            <artifactId>ktx-app</artifactId>
+            <version>${libktx.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

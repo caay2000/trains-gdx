@@ -25,6 +25,7 @@
         <maven-surefire.version>2.22.1</maven-surefire.version>
 
         <libgdx.version>1.6.1</libgdx.version>
+        <libktx.version>1.9.10-b6</libktx.version>
         <android.version>4.1.1.4</android.version>
         <android.maven.version>3.8.1</android.maven.version>
         <gwt.version>2.6.0</gwt.version>

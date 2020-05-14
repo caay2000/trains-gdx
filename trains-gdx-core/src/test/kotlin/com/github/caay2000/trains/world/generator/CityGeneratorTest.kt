@@ -18,7 +18,7 @@ class CityGeneratorTest {
     @Test
     fun `second city should be placed around 0,0`() {
 
-        val existingCity = City(Position(0, 0), 1)
+        val existingCity = City("name", Position(0, 0), 1)
 
         val city = CityGenerator.generateCity(setOf(existingCity))
 

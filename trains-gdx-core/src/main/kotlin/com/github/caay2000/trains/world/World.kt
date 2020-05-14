@@ -5,10 +5,10 @@ import kotlin.math.roundToInt
 
 class World {
 
-    private val locations: Set<Location>
-    private val size: WorldSize
+    val locations: Set<Location>
+    val companies: Set<Company>
 
-    private val companies: MutableSet<Company>
+    private val size: WorldSize
 
     private constructor(locations: Set<Location>, size: WorldSize) {
         this.locations = locations
@@ -22,7 +22,7 @@ class World {
     fun minX() = this.size.minX
     fun minY() = this.size.minY
 
-    fun addCompany(company: Company) = this.companies.add(company)
+    fun addCompany(company: Company) = (this.companies as MutableSet).add(company)
 
     fun update(delta: Float) {
         this.companies.forEach { it.update(delta) }
@@ -31,23 +31,7 @@ class World {
     }
 
     private fun testUpdate() {
-        if (companies.isEmpty()) {
-            companies.add(Company())
-        }
-
-        try {
-            val start = if (locations.filter { e -> e.connected() }.none()) locations.random()
-            else locations.filter { e -> e.connected() }.random()
-
-            val end = start.locationsInRange.filter { e -> !e.connected() }.random()
-            val route = Route(start, end)
-            companies.random().addRoute(route)
-            start.addConnection(end)
-            end.addConnection(start)
-            companies.random().addEntity(Train((5..10).random().toFloat(), route))
-        } catch (e: Exception) {
-
-        }
+        StubSimulation.stubSimulationUpdate(this)
     }
 
     class Builder {

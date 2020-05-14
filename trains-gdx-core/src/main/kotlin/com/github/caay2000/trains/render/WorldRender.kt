@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.graphics.OrthographicCamera
+import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.github.caay2000.trains.world.World
@@ -14,12 +15,17 @@ class WorldRender {
     private val screenMargin = 50
     private val shapeRenderer: ShapeRenderer = ShapeRenderer()
     private val batch: SpriteBatch = SpriteBatch()
-    private val camera: OrthographicCamera = OrthographicCamera()
     private var width = 800f
     private var height: Float
     private var aspectRatio: Float = Gdx.graphics.height.toFloat() / Gdx.graphics.width.toFloat()
+    private val camera: OrthographicCamera = OrthographicCamera(1f, aspectRatio)
+    private var worldPopulation = 0
+    private var font = BitmapFont()
+    private var elapsed = 0f
 
-    fun render(world: World) {
+    fun render(world: World, delta: Float) {
+        elapsed += delta
+        worldPopulation = 0
         camera.update()
         Gdx.gl.glClearColor(1f, 1f, 1f, 1f)
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
@@ -27,6 +33,7 @@ class WorldRender {
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA)
         Gdx.gl.glDisable(GL20.GL_BLEND)
         batch.projectionMatrix = camera.combined
+
         shapeRenderer.color = Color.BLACK
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled)
         for (city in world.cities()) {
@@ -35,6 +42,7 @@ class WorldRender {
                 city.position.y + yOffset(world),
                 city.population / 1000 + 1.toFloat()
             )
+            worldPopulation += city.population
         }
         for (company in world.companies()) {
             for (route in company.routes()) {
@@ -55,6 +63,15 @@ class WorldRender {
         }
 
         shapeRenderer.end()
+
+        batch.begin()
+        font.draw(batch, "population $worldPopulation", 400f, 400f)
+        font.draw(batch, "elapsed ${elapsedString()}", 400f, 420f)
+        batch.end()
+    }
+
+    private fun elapsedString(): String {
+        return "${elapsed.toInt() / 60}:${elapsed.toInt() % 60}"
     }
 
     private fun xOffset(world: World): Int {

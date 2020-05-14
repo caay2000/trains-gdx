@@ -12,7 +12,8 @@ object CityGenerator {
         if (position.isInvalid(existingLocations)) {
             return generateCity(existingLocations, configuration)
         }
-        return City(position, randomPopulation())
+        val name = NameGenerator.generate()
+        return City(name, position, randomPopulation())
     }
 
     private fun randomPosition(
@@ -32,4 +33,25 @@ object CityGenerator {
 
     private fun Position.isInvalid(existingLocations: Set<Location>): Boolean =
         existingLocations.filter { e -> e.position.distanceTo(this) < Configuration.minDistanceBetweenCities }.any()
+
+    object NameGenerator {
+
+        val consonants = "abcdefghijklmnopqrstuvwxyz"
+        val vowels = "aeiou"
+
+        fun generate(): String {
+            val builder = StringBuilder()
+            val size = (3..12).random()
+            for (i in 1..size) {
+                builder.append(generateLetter())
+            }
+            return builder.toString()
+        }
+
+        private fun generateLetter(): Char {
+            val rand = (0..100).random()
+            return if (rand <= 50) vowels.random()
+            else consonants.random()
+        }
+    }
 }

@@ -1,5 +1,6 @@
 package com.github.caay2000.trains
 
+import com.badlogic.gdx.Application
 import com.badlogic.gdx.ApplicationListener
 import com.badlogic.gdx.Gdx
 import com.github.caay2000.trains.render.WorldRender
@@ -7,11 +8,12 @@ import com.github.caay2000.trains.world.World
 import com.github.caay2000.trains.world.generator.WorldGenerator
 
 class SimpleTest : ApplicationListener {
-    private var world: World? = null
-    private var worldRender: WorldRender? = null
+    private lateinit var world: World
+    private lateinit var worldRender: WorldRender
     override fun create() {
 
         Configuration.numberOfCities = 50
+        Gdx.app.logLevel = Application.LOG_DEBUG
 
         world = WorldGenerator.generate()
         worldRender = WorldRender()
@@ -21,8 +23,8 @@ class SimpleTest : ApplicationListener {
     override fun render() {
 
         val delta = Gdx.graphics.deltaTime
-        world!!.update(delta)
-        worldRender!!.render(world!!)
+        world.update(delta)
+        worldRender.render(world, delta)
     }
 
     override fun pause() {}
