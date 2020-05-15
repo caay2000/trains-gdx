@@ -25,14 +25,16 @@ class City(val name: String, override val position: Position, population: Int) :
 
     private fun increaseOffer(delta: Float) {
 
-        val cargo = (this.offer as MutableMap).getOrPut(CargoType.PAX) { Cargo(CargoType.PAX) }
-        if (cargo.quantity < this.population * Configuration.cityMaxRatioPAXPopulation) {
-            this.paxDelta += this.population * delta * Configuration.cityRatioPopulationPAX
-            if (this.paxDelta.toInt() > 0) {
-                val grow = this.paxDelta.toInt()
-                cargo.add(grow)
-                this.paxDelta -= this.paxDelta.toInt()
-                debug(grow > 0) { "$name pax available increased by $grow to $cargo" }
+        if (connected()) {
+            val cargo = (this.offer as MutableMap).getOrPut(CargoType.PAX) { Cargo(CargoType.PAX) }
+            if (cargo.quantity < this.population * Configuration.cityMaxRatioPAXPopulation) {
+                this.paxDelta += this.population * delta * Configuration.cityRatioPopulationPAX
+                if (this.paxDelta.toInt() > 0) {
+                    val grow = this.paxDelta.toInt()
+                    cargo.add(grow)
+                    this.paxDelta -= this.paxDelta.toInt()
+                    debug(grow > 0) { "$name pax available increased by $grow to $cargo" }
+                }
             }
         }
     }

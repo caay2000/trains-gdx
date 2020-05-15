@@ -1,5 +1,7 @@
 package com.github.caay2000.trains.world
 
+import com.github.caay2000.trains.world.entity.Train
+
 object StubSimulation {
 
     fun stubSimulationUpdate(world: World) {
@@ -16,7 +18,7 @@ object StubSimulation {
             world.companies.random().addRoute(route)
             start.addConnection(end)
             end.addConnection(start)
-            world.companies.random().addEntity(Train((5..10).random().toFloat(), route))
+            world.companies.random().addEntity(Train((5..12).random().toFloat(), route))
         } catch (e: Exception) {
 
         }

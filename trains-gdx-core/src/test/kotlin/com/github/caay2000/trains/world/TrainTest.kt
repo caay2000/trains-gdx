@@ -1,5 +1,6 @@
 package com.github.caay2000.trains.world
 
+import com.github.caay2000.trains.world.entity.Train
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 

@@ -1,5 +1,7 @@
 package com.github.caay2000.trains.world
 
+import com.github.caay2000.trains.world.entity.Entity
+
 class Company {
 
     private val entities: MutableCollection<Entity>
