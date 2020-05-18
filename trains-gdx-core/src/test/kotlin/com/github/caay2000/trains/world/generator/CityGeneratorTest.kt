@@ -1,12 +1,13 @@
 package com.github.caay2000.trains.world.generator
 
 import com.github.caay2000.trains.Configuration
-import com.github.caay2000.trains.world.City
+import com.github.caay2000.trains.world.location.City
 import com.github.caay2000.trains.world.Position
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
-class CityGeneratorTest {
+class
+CityGeneratorTest {
 
     @Test
     fun `first city should be placed at 0,0`() {

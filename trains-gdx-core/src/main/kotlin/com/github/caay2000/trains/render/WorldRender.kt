@@ -40,9 +40,9 @@ class WorldRender {
             shapeRenderer.circle(
                 city.position.x + xOffset(world),
                 city.position.y + yOffset(world),
-                city.population / 1000 + 1.toFloat()
+                city.size / 1000 + 1.toFloat()
             )
-            worldPopulation += city.population
+            worldPopulation += city.size
         }
         for (company in world.companies()) {
             for (route in company.routes()) {
