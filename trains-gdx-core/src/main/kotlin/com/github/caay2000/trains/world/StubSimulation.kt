@@ -1,6 +1,8 @@
 package com.github.caay2000.trains.world
 
 import com.github.caay2000.trains.world.entity.Train
+import com.github.caay2000.trains.world.entity.Wagon
+import com.github.caay2000.trains.world.entity.WagonType
 
 object StubSimulation {
 
@@ -18,7 +20,7 @@ object StubSimulation {
             world.companies.random().addRoute(route)
             start.addConnection(end)
             end.addConnection(start)
-            world.companies.random().addEntity(Train((5..12).random().toFloat(), route))
+            world.companies.random().addEntity(Train((200..300).random().toFloat(), route, listOf<Wagon>(Wagon(WagonType.DEFAULT_PAX))))
         } catch (e: Exception) {
 
         }

@@ -33,10 +33,14 @@ class City(val name: String, override val position: Position, population: Int) :
                     val grow = this.paxDelta.toInt()
                     cargo.add(grow)
                     this.paxDelta -= this.paxDelta.toInt()
-                    debug(grow > 0) { "$name pax available increased by $grow to $cargo" }
+                    // debug(grow > 0) { "$name pax available increased by $grow to $cargo" }
                 }
             }
         }
+    }
+
+    fun deliverCargo(delivered: Int) {
+        population += delivered
     }
 
     private fun increasePopulation(delta: Float) {
@@ -45,7 +49,7 @@ class City(val name: String, override val position: Position, population: Int) :
         this.population += grow
         this.populationDelta -= this.populationDelta.toInt()
 
-        debug(grow > 0) { "$name populationIncreased by $grow to $population" }
+        // debug(grow > 0) { "$name populationIncreased by $grow to $population" }
     }
 
     private fun cityGrowingRatio() =

@@ -13,7 +13,7 @@ class TrainTest {
     @Test
     fun `move moves the train`() {
 
-        val sut = Train(1f, aRoute)
+        val sut = Train(1f, aRoute, listOf())
         sut.update(1f)
         assertThat(sut.position).isEqualTo(Position(1, 0))
     }
@@ -21,7 +21,7 @@ class TrainTest {
     @Test
     fun `move stops the train at the station`() {
 
-        val sut = Train(11f, aRoute)
+        val sut = Train(11f, aRoute, listOf())
         sut.update(1f)
         assertThat(sut.position).isEqualTo(Position(10, 0))
     }
