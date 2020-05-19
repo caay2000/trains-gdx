@@ -24,7 +24,7 @@ class SimpleTest : KtxApplicationAdapter {
     override fun resize(i: Int, i1: Int) {}
     override fun render() {
 
-        val delta = Gdx.graphics.deltaTime
+        val delta = Gdx.graphics.deltaTime * 10
         world.update(delta)
         worldRender.render(world, delta)
     }

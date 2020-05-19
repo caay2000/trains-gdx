@@ -8,10 +8,10 @@ enum class WagonType {
     DEFAULT_MAIL(25, CargoType.MAIL);
 
     val capacity: Int
-    val type: CargoType
+    val cargoType: CargoType
 
-    constructor(capacity: Int, type: CargoType) {
+    constructor(capacity: Int, cargoType: CargoType) {
         this.capacity = capacity
-        this.type = type
+        this.cargoType = cargoType
     }
 }

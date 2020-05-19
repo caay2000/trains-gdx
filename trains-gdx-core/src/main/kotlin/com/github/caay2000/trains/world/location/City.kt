@@ -1,6 +1,7 @@
 package com.github.caay2000.trains.world.location
 
 import com.github.caay2000.trains.world.Position
+import com.github.caay2000.trains.world.entity.Wagon
 
 class City {
 
@@ -9,9 +10,9 @@ class City {
     private val connections: Set<City> = mutableSetOf()
     val citiesInRange: Set<City> = mutableSetOf()
 
-    private val population: Population
+    internal val population: Population
     private val production: Production
-    private val consumption: Consumption
+    internal val consumption: Consumption
 
     constructor(name: String, position: Position, population: Int) {
 
@@ -29,6 +30,14 @@ class City {
     fun distanceTo(to: City): Float = position.distanceTo(to.position)
     fun addCityInRange(City: City) = (this.citiesInRange as MutableSet).add(City)
     fun addConnection(City: City) = (this.connections as MutableSet).add(City)
+
+    fun loadWagon(wagon: Wagon) {
+        this.production.load(wagon)
+    }
+
+    fun unloadWagon(wagon: Wagon) {
+        this.consumption.unload(wagon)
+    }
 
     fun update(delta: Float) {
 

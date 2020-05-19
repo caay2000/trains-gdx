@@ -3,8 +3,11 @@ package com.github.caay2000.trains.world.location
 import com.github.caay2000.trains.Configuration
 import com.github.caay2000.trains.debug
 import com.github.caay2000.trains.world.CargoType
+import com.github.caay2000.trains.world.entity.Wagon
+import kotlin.math.max
+import kotlin.math.min
 
-class Production {
+internal class Production {
 
     private val city: City
     private val produced: Map<CargoType, Int> = mutableMapOf()
@@ -39,7 +42,7 @@ class Production {
             if (grow > 0) {
                 this.put(CargoType.MAIL, value + grow)
                 this.mailDelta -= grow
-                debug(grow > 0) { "PRODUCTION MAIL ${city.name} increased by $grow to ${value+grow}" }
+                debug(grow > 0) { "PRODUCTION MAIL ${city.name} increased by $grow to ${value + grow}" }
             }
         }
     }
@@ -53,11 +56,20 @@ class Production {
                 if (grow > 0) {
                     this.put(CargoType.PAX, value + grow)
                     this.paxDelta -= grow
-                    debug(grow > 0) { "PRODUCTION PAX ${city.name} increased by $grow to ${value+grow}" }
+                    debug(grow > 0) { "PRODUCTION PAX ${city.name} increased by $grow to ${value + grow}" }
                 }
             }
         }
     }
 
     private fun getProductionCargos(): Set<CargoType> = setOf(CargoType.PAX, CargoType.MAIL)
+
+    fun load(wagon: Wagon) {
+        if (this.produced.containsKey(wagon.model.cargoType)) {
+            val produced = this.produced.getValue(wagon.model.cargoType)
+            wagon.load = min(wagon.model.capacity, produced)
+            this.put(wagon.model.cargoType, max(produced - wagon.model.capacity, 0))
+            debug(wagon.load > 0) { "LOAD ${wagon.load} ${wagon.model.cargoType} at ${city.name}" }
+        }
+    }
 }

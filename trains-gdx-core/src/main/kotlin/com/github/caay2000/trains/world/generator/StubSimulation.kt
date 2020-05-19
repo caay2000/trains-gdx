@@ -1,5 +1,8 @@
-package com.github.caay2000.trains.world
+package com.github.caay2000.trains.world.generator
 
+import com.github.caay2000.trains.world.Company
+import com.github.caay2000.trains.world.World
+import com.github.caay2000.trains.world.entity.Route
 import com.github.caay2000.trains.world.entity.Train
 import com.github.caay2000.trains.world.entity.Wagon
 import com.github.caay2000.trains.world.entity.WagonType
@@ -12,6 +15,9 @@ object StubSimulation {
         }
 
         try {
+
+            val wagonList = listOf(Wagon(WagonType.DEFAULT_PAX), Wagon(WagonType.DEFAULT_PAX), Wagon(WagonType.DEFAULT_MAIL))
+
             val start = if (world.cities.filter { e -> e.connected() }.none()) world.cities.random()
             else world.cities.filter { e -> e.connected() && e.citiesInRange.any { i -> !i.connected() } }.random()
 
@@ -20,7 +26,7 @@ object StubSimulation {
             world.companies.random().addRoute(route)
             start.addConnection(end)
             end.addConnection(start)
-            world.companies.random().addEntity(Train((200..300).random().toFloat(), route, listOf<Wagon>(Wagon(WagonType.DEFAULT_PAX))))
+            world.companies.random().addEntity(Train((6..10).random().toFloat(), route, wagonList))
         } catch (e: Exception) {
 
         }

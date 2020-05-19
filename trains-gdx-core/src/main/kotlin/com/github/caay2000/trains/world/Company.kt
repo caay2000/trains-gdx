@@ -1,10 +1,11 @@
 package com.github.caay2000.trains.world
 
-import com.github.caay2000.trains.world.entity.Entity
+import com.github.caay2000.trains.world.entity.Train
+import com.github.caay2000.trains.world.entity.Route
 
 class Company {
 
-    private val entities: MutableCollection<Entity>
+    private val entities: MutableCollection<Train>
     private val routes: MutableCollection<Route>
 
     constructor() {
@@ -16,7 +17,7 @@ class Company {
         this.routes.add(route)
     }
 
-    fun addEntity(entity: Entity) {
+    fun addEntity(entity: Train) {
         this.entities.add(entity)
     }
 

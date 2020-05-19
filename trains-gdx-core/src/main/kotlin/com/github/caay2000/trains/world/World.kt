@@ -1,6 +1,7 @@
 package com.github.caay2000.trains.world
 
 import com.github.caay2000.trains.Configuration
+import com.github.caay2000.trains.world.generator.StubSimulation
 import com.github.caay2000.trains.world.location.City
 import kotlin.math.roundToInt
 

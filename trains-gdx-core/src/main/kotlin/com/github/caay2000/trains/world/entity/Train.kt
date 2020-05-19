@@ -1,18 +1,26 @@
 package com.github.caay2000.trains.world.entity
 
 import com.github.caay2000.trains.DelayedCounter
-import com.github.caay2000.trains.world.CargoType
 import com.github.caay2000.trains.world.Position
-import com.github.caay2000.trains.world.Route
 
-class Train(private val speed: Float, private val route: Route, private var wagons: List<Wagon>) : Entity {
+class Train {
 
     private val eventHandler = TrainEventHandler()
+    private val speed: Float
+    private val route: Route
+    private var wagons: List<Wagon>
+    val position: Position
 
-    override val position: Position = Position(route.start.position)
     private var status: EntityStatus = EntityStatus.ON_ROUTE
 
-    override fun update(delta: Float) {
+    constructor(speed: Float, route: Route, wagons: List<Wagon>) {
+        this.speed = speed
+        this.route = route
+        this.wagons = wagons
+        this.position = Position(route.start.position)
+    }
+
+    fun update(delta: Float) {
         eventHandler.handle(this, delta)
     }
 
@@ -28,29 +36,19 @@ class Train(private val speed: Float, private val route: Route, private var wago
         }
     }
 
-    private fun unloadWagons() {
-        // val demands = this.route.end.consumes
-        // for(wagon in wagons){
-        //     (this.route.end as City).deliverCargo(wagon.load)
-        //     wagon.load = 0
-        // }
+    private fun loadWagons() {
+        val station = route.end
+        for (wagon in wagons) {
+            station.loadWagon(wagon)
+        }
     }
 
-    private fun loadWagons(loadCargos: Set<CargoType>) {
+    private fun unloadWagons() {
 
-        // val offers: Map<CargoType, Cargo> = this.route.end.produces
-        // for (wagon in wagons) {
-        //     if (loadCargos.contains(wagon.type.type)) {
-        //         val cargo = offers.getOrDefault(wagon.type.type, Cargo(wagon.type.type))
-        //         if (cargo.quantity > 0) {
-        //             wagon.load = min(cargo.quantity, wagon.type.capacity)
-        //
-        //             offers[wagon.type.type]?.quantity = (offers[wagon.type.type]?.quantity ?: 0) - wagon.load
-        //
-        //             debug { "wagon loaded with ${wagon.load} ${wagon.type}. Station ${(this.route.end as City).name} has now ${offers.get(wagon.type.type)?.quantity ?: 0} ${wagon.type}" }
-        //         }
-        //     }
-        // }
+        val station = route.end
+        for (wagon in wagons) {
+            station.unloadWagon(wagon)
+        }
     }
 
     enum class EntityStatus {
@@ -82,16 +80,12 @@ class Train(private val speed: Float, private val route: Route, private var wago
                         }
                     }
                     EntityStatus.UNLOADING -> {
-                        // train.unloadWagons()
+                        train.unloadWagons()
                         train.status = EntityStatus.LOADING
                         this.handle(train, delta)
                     }
                     EntityStatus.LOADING -> {
-                        // val loadCargos = train.wagons
-                        //     .map { e -> e.type.type }
-                        //     .filter { e -> train.route.nextStop().consumes.contains(e) }
-                        //     .toSet()
-                        // train.loadWagons(loadCargos)
+                        train.loadWagons()
                         train.route.endRoute()
                         train.status = EntityStatus.ON_ROUTE
                         this.handle(train, delta)

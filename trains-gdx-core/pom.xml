@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.github.caay2000</groupId>
         <artifactId>trains-gdx</artifactId>
-        <version>20200518</version>
+        <version>20200519</version>
     </parent>
 
     <artifactId>trains-gdx-core</artifactId>
