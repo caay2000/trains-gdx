@@ -4,4 +4,4 @@ import com.github.caay2000.trains.world.entity.Train
 
 sealed class MessageInfo
 
-class MessageTrainInfo(val train: Train) : MessageInfo()
+class TrainEvent(val train: Train, val status: Train.EntityStatus) : MessageInfo()

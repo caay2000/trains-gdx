@@ -2,7 +2,7 @@ package com.github.caay2000.trains.world.entity
 
 import com.github.caay2000.trains.Configuration
 import com.github.caay2000.trains.event.EventBus
-import com.github.caay2000.trains.event.MessageTrainInfo
+import com.github.caay2000.trains.event.TrainEvent
 import com.github.caay2000.trains.world.Position
 import com.github.caay2000.trains.world.WorldObject
 
@@ -64,9 +64,11 @@ class Train : WorldObject {
 
     enum class EntityStatus {
         ON_ROUTE,
-        STATION_STOP,
+        ENTER_STATION,
         UNLOADING,
-        LOADING
+        LOADING,
+        EXIT_STATION,
+        LEAVING_STATION
     }
 
     private class TrainEventHandler {
@@ -77,16 +79,16 @@ class Train : WorldObject {
                     EntityStatus.ON_ROUTE -> {
                         val result = train.move(delta)
                         if (result > 0) {
-                            train.status = EntityStatus.STATION_STOP
+                            train.status = EntityStatus.ENTER_STATION
                             this.handle(train, result)
                         }
                     }
-                    EntityStatus.STATION_STOP -> {
+                    EntityStatus.ENTER_STATION -> {
                         if (!train.messageDispatched) {
                             train.messageDispatched = true
                             EventBus.dispatchMessage(
                                 delay = Configuration.stationStopTime - delta,
-                                messageInfo = MessageTrainInfo(train)
+                                messageInfo = TrainEvent(train, EntityStatus.UNLOADING)
                             )
                         }
                     }
@@ -97,6 +99,19 @@ class Train : WorldObject {
                     }
                     EntityStatus.LOADING -> {
                         train.loadWagons()
+                        train.status = EntityStatus.EXIT_STATION
+                        this.handle(train, delta)
+                    }
+                    EntityStatus.EXIT_STATION -> {
+                        if (!train.messageDispatched) {
+                            train.messageDispatched = true
+                            EventBus.dispatchMessage(
+                                delay = Configuration.stationStopTime - delta,
+                                messageInfo = TrainEvent(train, EntityStatus.LEAVING_STATION)
+                            )
+                        }
+                    }
+                    EntityStatus.LEAVING_STATION -> {
                         train.route.endRoute()
                         train.status = EntityStatus.ON_ROUTE
                         this.handle(train, delta)
