@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.caay2000</groupId>
     <artifactId>trains-gdx</artifactId>
-    <version>20200519</version>
+    <version>20200528</version>
     <packaging>pom</packaging>
     <name>Trains GDX Parent</name>
 
@@ -24,7 +24,8 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven-surefire.version>2.22.1</maven-surefire.version>
 
-        <libgdx.version>1.6.1</libgdx.version>
+        <libgdx.version>1.9.10</libgdx.version>
+        <libgdx-ai.version>1.8.2</libgdx-ai.version>
         <libktx.version>1.9.10-b6</libktx.version>
         <android.version>4.1.1.4</android.version>
         <android.maven.version>3.8.1</android.maven.version>
@@ -50,6 +51,11 @@
                 <groupId>com.badlogicgames.gdx</groupId>
                 <artifactId>gdx</artifactId>
                 <version>${libgdx.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.badlogicgames.gdx</groupId>
+                <artifactId>gdx-ai</artifactId>
+                <version>${libgdx-ai.version}</version>
             </dependency>
 
             <!-- android-specific dependencies -->

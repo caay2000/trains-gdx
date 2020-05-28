@@ -42,7 +42,7 @@ internal class Production {
             if (grow > 0) {
                 this.put(CargoType.MAIL, value + grow)
                 this.mailDelta -= grow
-                debug(grow > 0) { "PRODUCTION MAIL ${city.name} increased by $grow to ${value + grow}" }
+                debug(grow > 0) { "PRODUCTION MAIL ${city.name}[${city.id}] increased by $grow to ${value + grow}" }
             }
         }
     }
@@ -56,7 +56,7 @@ internal class Production {
                 if (grow > 0) {
                     this.put(CargoType.PAX, value + grow)
                     this.paxDelta -= grow
-                    debug(grow > 0) { "PRODUCTION PAX ${city.name} increased by $grow to ${value + grow}" }
+                    debug(grow > 0) { "PRODUCTION PAX ${city.name}[${city.id}] increased by $grow to ${value + grow}" }
                 }
             }
         }
@@ -69,7 +69,7 @@ internal class Production {
             val produced = this.produced.getValue(wagon.model.cargoType)
             wagon.load = min(wagon.model.capacity, produced)
             this.put(wagon.model.cargoType, max(produced - wagon.model.capacity, 0))
-            debug(wagon.load > 0) { "LOAD ${wagon.load} ${wagon.model.cargoType} at ${city.name}" }
+            debug(wagon.load > 0) { "LOAD ${wagon.load} ${wagon.model.cargoType} at ${city.name}[${city.id}]" }
         }
     }
 }

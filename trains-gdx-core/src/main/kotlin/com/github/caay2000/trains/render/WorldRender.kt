@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
+import com.github.caay2000.trains.debug
+import com.github.caay2000.trains.world.GlobalData
 import com.github.caay2000.trains.world.World
 import kotlin.math.abs
 
@@ -21,10 +23,9 @@ class WorldRender {
     private val camera: OrthographicCamera = OrthographicCamera(1f, aspectRatio)
     private var worldPopulation = 0
     private var font = BitmapFont()
-    private var elapsed = 0f
 
-    fun render(world: World, delta: Float) {
-        elapsed += delta
+    fun render(world: World) {
+        debug { "Update delta: ${GlobalData.delta}, elapsed: ${GlobalData.current}" }
         worldPopulation = 0
         camera.update()
         Gdx.gl.glClearColor(1f, 1f, 1f, 1f)
@@ -66,12 +67,12 @@ class WorldRender {
 
         batch.begin()
         font.draw(batch, "population $worldPopulation", 400f, 400f)
-        font.draw(batch, "elapsed ${elapsedString()}", 400f, 420f)
+        font.draw(batch, "elapsed ${elapsedString(GlobalData.current)}", 400f, 420f)
         batch.end()
     }
 
-    private fun elapsedString(): String {
-        return "${elapsed.toInt() / 60}:${elapsed.toInt() % 60}"
+    private fun elapsedString(current: Float): String {
+        return "${current.toInt() / 60}:${current.toInt() % 60}"
     }
 
     private fun xOffset(world: World): Int {

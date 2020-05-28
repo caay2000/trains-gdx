@@ -2,6 +2,8 @@ package com.github.caay2000.trains
 
 object Configuration {
 
+    var gameSpeed = 10f
+
     var numberOfCities = 300
     var maxDistanceBetweenCities = 80
     var minDistanceBetweenCities = 50

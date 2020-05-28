@@ -1,16 +1,17 @@
 package com.github.caay2000.trains.world.location
 
 import com.github.caay2000.trains.world.Position
+import com.github.caay2000.trains.world.WorldObject
 import com.github.caay2000.trains.world.entity.Wagon
 
-class City {
+class City : WorldObject {
 
     val name: String
     val position: Position
     private val connections: Set<City> = mutableSetOf()
     val citiesInRange: Set<City> = mutableSetOf()
 
-    internal val population: Population
+    private val population: Population
     private val production: Production
     internal val consumption: Consumption
 

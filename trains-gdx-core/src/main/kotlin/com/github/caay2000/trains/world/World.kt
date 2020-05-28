@@ -26,9 +26,9 @@ class World {
 
     fun addCompany(company: Company) = (this.companies as MutableSet).add(company)
 
-    fun update(delta: Float) {
-        this.companies.forEach { it.update(delta) }
-        this.cities.forEach { it.update(delta) }
+    fun update() {
+        this.companies.forEach { it.update(GlobalData.delta) }
+        this.cities.forEach { it.update(GlobalData.delta) }
         testUpdate()
     }
 

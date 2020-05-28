@@ -29,14 +29,14 @@ internal class Consumption {
                 this.put(cargoType, value - maxDelivered * division.toInt())
             }
         }
-        debug(total > 0) { "DELIVERED cargo increases ${city.name} population by $total" }
+        debug(total > 0) { "DELIVERED cargo increases ${city.name}[${city.id}] population by $total" }
         return total
     }
 
     fun unload(wagon: Wagon) {
         val actualConsumed = consumed.getOrDefault(wagon.model.cargoType, 0)
         this.put(wagon.model.cargoType, actualConsumed + wagon.load)
-        debug(wagon.load > 0) { "UNLOAD ${wagon.load} ${wagon.model.cargoType} of ${consumed[wagon.model.cargoType]} at ${city.name}" }
+        debug(wagon.load > 0) { "UNLOAD ${wagon.load} ${wagon.model.cargoType} of ${consumed[wagon.model.cargoType]} at ${city.name}[${city.id}]" }
         wagon.load = 0
     }
 }

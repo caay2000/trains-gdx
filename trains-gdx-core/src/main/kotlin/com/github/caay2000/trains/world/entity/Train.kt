@@ -1,15 +1,20 @@
 package com.github.caay2000.trains.world.entity
 
-import com.github.caay2000.trains.DelayedCounter
+import com.github.caay2000.trains.Configuration
+import com.github.caay2000.trains.event.EventBus
+import com.github.caay2000.trains.event.MessageTrainInfo
 import com.github.caay2000.trains.world.Position
+import com.github.caay2000.trains.world.WorldObject
 
-class Train {
+class Train : WorldObject {
 
     private val eventHandler = TrainEventHandler()
     private val speed: Float
     private val route: Route
     private var wagons: List<Wagon>
     val position: Position
+
+    private var messageDispatched: Boolean = false
 
     private var status: EntityStatus = EntityStatus.ON_ROUTE
 
@@ -21,6 +26,12 @@ class Train {
     }
 
     fun update(delta: Float) {
+        eventHandler.handle(this, delta)
+    }
+
+    fun update(delta: Float, status: EntityStatus) {
+        this.status = status
+        this.messageDispatched = false
         eventHandler.handle(this, delta)
     }
 
@@ -60,8 +71,6 @@ class Train {
 
     private class TrainEventHandler {
 
-        private val stationStopDelay = DelayedCounter(1f)
-
         fun handle(train: Train, delta: Float) {
             if (delta > 0) {
                 when (train.status) {
@@ -73,10 +82,12 @@ class Train {
                         }
                     }
                     EntityStatus.STATION_STOP -> {
-                        val result = stationStopDelay.update(delta)
-                        if (result > 0) {
-                            train.status = EntityStatus.UNLOADING
-                            this.handle(train, result)
+                        if (!train.messageDispatched) {
+                            train.messageDispatched = true
+                            EventBus.dispatchMessage(
+                                delay = Configuration.stationStopTime - delta,
+                                messageInfo = MessageTrainInfo(train)
+                            )
                         }
                     }
                     EntityStatus.UNLOADING -> {

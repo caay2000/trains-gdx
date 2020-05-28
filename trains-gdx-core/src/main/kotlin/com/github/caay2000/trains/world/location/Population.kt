@@ -26,7 +26,7 @@ internal class Population {
         this.population += grow
         this.populationDelta -= this.populationDelta.toInt()
 
-        debug(grow > 0) { "POPULATION ${city.name} increased by $grow to $population" }
+        debug(grow > 0) { "POPULATION ${city.name}[${city.id}] increased by $grow to $population" }
     }
 
     private fun cityGrowingRatio() =
