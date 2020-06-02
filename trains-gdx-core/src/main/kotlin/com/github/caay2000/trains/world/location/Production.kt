@@ -3,6 +3,7 @@ package com.github.caay2000.trains.world.location
 import com.github.caay2000.trains.Configuration
 import com.github.caay2000.trains.debug
 import com.github.caay2000.trains.world.CargoType
+import com.github.caay2000.trains.world.entity.Entity
 import com.github.caay2000.trains.world.entity.Wagon
 import kotlin.math.max
 import kotlin.math.min
@@ -64,11 +65,18 @@ internal class Production {
 
     private fun getProductionCargos(): Set<CargoType> = setOf(CargoType.PAX, CargoType.MAIL)
 
-    fun load(wagon: Wagon) {
+    fun load(entity: Entity, delta: Float) {
+        for (wagon in entity.wagons) {
+            loadWagon(wagon, delta)
+        }
+    }
+
+    private fun loadWagon(wagon: Wagon, delta: Float) {
         if (this.produced.containsKey(wagon.model.cargoType)) {
             val produced = this.produced.getValue(wagon.model.cargoType)
-            wagon.load = min(wagon.model.capacity, produced)
-            this.put(wagon.model.cargoType, max(produced - wagon.model.capacity, 0))
+            val maxLoadable = ((wagon.model.capacity) * delta / wagon.model.loadTimeUnit).toInt()
+            wagon.load = min(maxLoadable, produced)
+            this.put(wagon.model.cargoType, max(produced - maxLoadable, 0))
             debug(wagon.load > 0) { "LOAD ${wagon.load} ${wagon.model.cargoType} at ${city.name}[${city.id}]" }
         }
     }

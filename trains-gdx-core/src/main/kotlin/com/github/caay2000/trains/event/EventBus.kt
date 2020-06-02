@@ -15,17 +15,25 @@ object EventBus {
         messageDispatcher.update()
     }
 
-    fun dispatchMessage(delay: Float = 0f, messageInfo: MessageInfo) {
-        dispatch(delay = delay, message = messageInfo)
+    fun addListener(listener: EventListener, messageType: MessageType) {
+        messageDispatcher.addListener(listener, messageType.ordinal)
     }
 
-    private fun dispatch(delay: Float = 0f, message: MessageInfo) {
+    fun dispatchMessage(message: MessageInfo, delta: Float = 0f, delay: Float = 0f) {
+        if (delta > 0 && delay > 0) {
+            dispatch(delay = delay - delta, message = message)
+        } else {
+            dispatch(delta = delta, delay = delay, message = message)
+        }
+    }
+
+    private fun dispatch(delta: Float = 0f, delay: Float = 0f, message: MessageInfo) {
 
         messageDispatcher.dispatchMessage(
             delay,
             messageDispatcher,
-            MessageType.TRAINS_GDX_MESSAGE_TYPE.ordinal,
-            MessageInfoWrapper(delay, message)
+            message.type.ordinal,
+            EventMessage(delta, delay, message)
         )
     }
 }

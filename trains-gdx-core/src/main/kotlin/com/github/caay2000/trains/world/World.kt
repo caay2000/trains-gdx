@@ -50,7 +50,7 @@ class World {
 
         private fun updateConnections(newCity: City) {
             for (existingCity in cities) {
-                if (newCity.distanceTo(existingCity) < Configuration.maxRouteDistanceBetweenCities) {
+                if (newCity.distanceTo(existingCity) < Configuration.maxRouteDistanceBetweenCities && newCity != existingCity) {
                     newCity.addCityInRange(existingCity)
                     existingCity.addCityInRange(newCity)
                 }

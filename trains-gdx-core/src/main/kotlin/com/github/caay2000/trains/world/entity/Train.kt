@@ -2,7 +2,7 @@ package com.github.caay2000.trains.world.entity
 
 import com.github.caay2000.trains.Configuration
 import com.github.caay2000.trains.event.EventBus
-import com.github.caay2000.trains.event.TrainEvent
+import com.github.caay2000.trains.event.TrainEvent2
 import com.github.caay2000.trains.world.Position
 import com.github.caay2000.trains.world.WorldObject
 
@@ -25,7 +25,7 @@ class Train : WorldObject {
         this.position = Position(route.start.position)
     }
 
-    fun update(delta: Float) {
+    override fun update(delta: Float) {
         eventHandler.handle(this, delta)
     }
 
@@ -49,9 +49,9 @@ class Train : WorldObject {
 
     private fun loadWagons() {
         val station = route.end
-        for (wagon in wagons) {
-            station.loadWagon(wagon)
-        }
+        // for (wagon in wagons) {
+        //     station.loadWagon(wagon)
+        // }
     }
 
     private fun unloadWagons() {
@@ -87,8 +87,8 @@ class Train : WorldObject {
                         if (!train.messageDispatched) {
                             train.messageDispatched = true
                             EventBus.dispatchMessage(
-                                delay = Configuration.stationStopTime - delta,
-                                messageInfo = TrainEvent(train, EntityStatus.UNLOADING)
+                                message = TrainEvent2(train, EntityStatus.UNLOADING),
+                                delay = Configuration.stationStopTime - delta
                             )
                         }
                     }
@@ -106,8 +106,8 @@ class Train : WorldObject {
                         if (!train.messageDispatched) {
                             train.messageDispatched = true
                             EventBus.dispatchMessage(
-                                delay = Configuration.stationStopTime - delta,
-                                messageInfo = TrainEvent(train, EntityStatus.LEAVING_STATION)
+                                message = TrainEvent2(train, EntityStatus.LEAVING_STATION),
+                                delay = Configuration.stationStopTime - delta
                             )
                         }
                     }

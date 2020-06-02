@@ -2,6 +2,7 @@ package com.github.caay2000.trains.world.location
 
 import com.github.caay2000.trains.world.Position
 import com.github.caay2000.trains.world.WorldObject
+import com.github.caay2000.trains.world.entity.Entity
 import com.github.caay2000.trains.world.entity.Wagon
 
 class City : WorldObject {
@@ -32,15 +33,15 @@ class City : WorldObject {
     fun addCityInRange(City: City) = (this.citiesInRange as MutableSet).add(City)
     fun addConnection(City: City) = (this.connections as MutableSet).add(City)
 
-    fun loadWagon(wagon: Wagon) {
-        this.production.load(wagon)
+    fun loadEntity(entity: Entity, delta: Float) {
+        this.production.load(entity, delta)
     }
 
     fun unloadWagon(wagon: Wagon) {
         this.consumption.unload(wagon)
     }
 
-    fun update(delta: Float) {
+    override fun update(delta: Float) {
 
         production.update(delta)
         population.update(delta)
