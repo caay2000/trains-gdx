@@ -1,4 +1,4 @@
-package com.github.caay2000.trains.world
+package com.github.caay2000.trains.world.position
 
 import com.badlogic.gdx.math.Vector2
 
@@ -22,7 +22,8 @@ class Position {
         this.vec2d = Vector2(vec2d.x, vec2d.y)
     }
 
-    private fun copy(): Position = Position(this.vec2d)
+    private fun copy(): Position =
+        Position(this.vec2d)
 
     val x: Float get() = this.vec2d.x
     val y: Float get() = this.vec2d.y

@@ -3,7 +3,7 @@ package com.github.caay2000.trains.world
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.ai.GdxAI
 import com.github.caay2000.trains.Configuration
-import com.github.caay2000.trains.event.EventBus
+// import com.github.caay2000.trains.event.EventBus
 
 object GlobalData {
 
@@ -19,6 +19,6 @@ object GlobalData {
         this.delta = Gdx.graphics.deltaTime * this.gameSpeed
         this.current += delta
         GdxAI.getTimepiece().update(delta)
-        EventBus.update()
+        // EventBus.update()
     }
 }

@@ -1,27 +1,26 @@
 package com.github.caay2000.trains.world.generator
 
 import com.github.caay2000.trains.Configuration
-import com.github.caay2000.trains.world.location.City
-import com.github.caay2000.trains.world.Position
+import com.github.caay2000.trains.world.position.Position
+import com.github.caay2000.trains.world.`object`.location.city.City
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
-class
-CityGeneratorTest {
+class LocationGeneratorTest {
 
     @Test
     fun `first city should be placed at 0,0`() {
 
-        val city = CityGenerator.generateCity(setOf())
+        val city = LocationGenerator.generateLocation(setOf())
         assertThat(city.position).isEqualTo(Position())
     }
 
     @Test
     fun `second city should be placed around 0,0`() {
 
-        val existingCity = City("name", Position(0, 0), 1)
+        val existingLocation = City(Position(0, 0), "name", 1)
 
-        val city = CityGenerator.generateCity(setOf(existingCity))
+        val city = LocationGenerator.generateLocation(setOf(existingLocation))
 
         assertThat(city.position.distanceTo(Position())).isGreaterThan(Configuration.minDistanceBetweenCities.toFloat())
         // assertThat(city.position.distanceTo(Position())).isLessThan(Configuration.maxDistanceBetweenCities.toFloat())

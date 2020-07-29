@@ -1,11 +1,11 @@
 package com.github.caay2000.trains.world.generator
 
-import com.github.caay2000.trains.world.Company
+import com.github.caay2000.trains.world.company.Company
 import com.github.caay2000.trains.world.World
-import com.github.caay2000.trains.world.entity.Entity
-import com.github.caay2000.trains.world.entity.Route
-import com.github.caay2000.trains.world.entity.Wagon
-import com.github.caay2000.trains.world.entity.WagonType
+import com.github.caay2000.trains.world.`object`.entity.Entity
+import com.github.caay2000.trains.world.`object`.entity.Route
+import com.github.caay2000.trains.world.`object`.entity.Wagon
+import com.github.caay2000.trains.world.`object`.entity.BasicWagonType
 
 object StubSimulation {
 
@@ -19,12 +19,12 @@ object StubSimulation {
 
             try {
 
-                val wagonList = listOf(Wagon(WagonType.DEFAULT_PAX), Wagon(WagonType.DEFAULT_PAX), Wagon(WagonType.DEFAULT_MAIL))
+                val wagonList = listOf(Wagon(BasicWagonType.DEFAULT_PAX), Wagon(BasicWagonType.DEFAULT_PAX), Wagon(BasicWagonType.DEFAULT_MAIL))
 
-                val start = if (world.cities.filter { e -> e.connected() }.none()) world.cities.random()
-                else world.cities.filter { e -> e.connected() && e.citiesInRange.any { i -> !i.connected() } }.random()
+                val start = if (world.locations.filter { e -> e.connected() }.none()) world.locations.random()
+                else world.locations.filter { e -> e.connected() && e.locationsInRange.any { i -> !i.connected() } }.random()
 
-                val end = start.citiesInRange.filter { e -> !e.connected() }.random()
+                val end = start.locationsInRange.filter { e -> !e.connected() }.random()
                 val route = Route(start, end)
                 world.companies.random().addRoute(route)
                 start.addConnection(end)
@@ -33,7 +33,7 @@ object StubSimulation {
             } catch (e: Exception) {
 
             }
-            simulationCompleted = world.cities.all { e -> e.connected() }
+            simulationCompleted = world.locations.all { e -> e.connected() }
         }
     }
 }

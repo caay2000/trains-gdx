@@ -1,22 +1,23 @@
 package com.github.caay2000.trains.world.generator
 
 import com.github.caay2000.trains.Configuration
-import com.github.caay2000.trains.world.location.City
-import com.github.caay2000.trains.world.Position
+import com.github.caay2000.trains.world.`object`.location.AbstractLocation
+import com.github.caay2000.trains.world.position.Position
+import com.github.caay2000.trains.world.`object`.location.city.City
 
-object CityGenerator {
+object LocationGenerator {
 
-    fun generateCity(existingCities: Set<City>, configuration: Configuration = Configuration): City {
+    fun generateLocation(existingCities: Set<AbstractLocation>, configuration: Configuration = Configuration): AbstractLocation {
         val position = randomPosition(existingCities, configuration)
         if (position.isInvalid(existingCities)) {
-            return generateCity(existingCities, configuration)
+            return generateLocation(existingCities, configuration)
         }
         val name = NameGenerator.generate()
-        return City(name, position, randomPopulation())
+        return City(position, name, randomPopulation())
     }
 
     private fun randomPosition(
-        existingCities: Set<City>,
+        existingCities: Set<AbstractLocation>,
         configuration: Configuration
     ): Position {
 
@@ -28,9 +29,9 @@ object CityGenerator {
             .generate()
     }
 
-    private fun randomPopulation() = (Configuration.minCityPopulation..Configuration.maxCityPopulation).random()
+    private fun randomPopulation() = (Configuration.minLocationPopulation..Configuration.maxLocationPopulation).random()
 
-    private fun Position.isInvalid(existingCities: Set<City>): Boolean =
+    private fun Position.isInvalid(existingCities: Set<AbstractLocation>): Boolean =
         existingCities.filter { e -> e.position.distanceTo(this) < Configuration.minDistanceBetweenCities }.any()
 
     object NameGenerator {

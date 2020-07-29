@@ -1,8 +1,8 @@
-package com.github.caay2000.trains.world
+package com.github.caay2000.trains.world.company
 
-import com.github.caay2000.trains.world.entity.Entity
-import com.github.caay2000.trains.world.entity.Train
-import com.github.caay2000.trains.world.entity.Route
+import com.github.caay2000.trains.world.`object`.entity.Entity
+// import com.github.caay2000.trains.world.object.entity.Train
+import com.github.caay2000.trains.world.`object`.entity.Route
 
 class Company {
 

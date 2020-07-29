@@ -1,24 +1,27 @@
 package com.github.caay2000.trains.world
 
 import com.github.caay2000.trains.Configuration
+import com.github.caay2000.trains.world.company.Company
 import com.github.caay2000.trains.world.generator.StubSimulation
-import com.github.caay2000.trains.world.location.City
+import com.github.caay2000.trains.world.`object`.location.city.City
+import com.github.caay2000.trains.world.`object`.location.AbstractLocation
 import kotlin.math.roundToInt
 
 class World {
 
-    val cities: Set<City>
+    val locations: Set<AbstractLocation>
     val companies: Set<Company>
 
     private val size: WorldSize
 
-    private constructor(cities: Set<City>, size: WorldSize) {
-        this.cities = cities
+    private constructor(cities: Set<AbstractLocation>, size: WorldSize) {
+        this.locations = cities
         this.companies = mutableSetOf()
         this.size = size
     }
 
-    fun cities() = this.cities.filterIsInstance<City>().toSet()
+    fun locations() = this.locations.toSet()
+    fun cities() = this.locations.filterIsInstance<City>().toSet()
     fun companies() = this.companies
 
     fun minX() = this.size.minX
@@ -28,7 +31,7 @@ class World {
 
     fun update() {
         this.companies.forEach { it.update(GlobalData.delta) }
-        this.cities.forEach { it.update(GlobalData.delta) }
+        this.locations.forEach { it.update(GlobalData.delta) }
         testUpdate()
     }
 
@@ -38,21 +41,21 @@ class World {
 
     class Builder {
 
-        private val cities: MutableSet<City> = mutableSetOf()
+        private val cities: MutableSet<AbstractLocation> = mutableSetOf()
         private val size: WorldSize =
             WorldSize()
 
-        fun addCity(City: City) {
-            this.cities.add(City)
-            this.size.update(City)
-            this.updateConnections(City)
+        fun addLocation(Location: AbstractLocation) {
+            this.cities.add(Location)
+            this.size.update(Location)
+            this.updateConnections(Location)
         }
 
-        private fun updateConnections(newCity: City) {
-            for (existingCity in cities) {
-                if (newCity.distanceTo(existingCity) < Configuration.maxRouteDistanceBetweenCities && newCity != existingCity) {
-                    newCity.addCityInRange(existingCity)
-                    existingCity.addCityInRange(newCity)
+        private fun updateConnections(newLocation: AbstractLocation) {
+            for (existingLocation in cities) {
+                if (newLocation.distanceTo(existingLocation) < Configuration.maxRouteDistanceBetweenCities && newLocation != existingLocation) {
+                    newLocation.addLocationInRange(existingLocation)
+                    existingLocation.addLocationInRange(newLocation)
                 }
             }
         }
@@ -68,18 +71,18 @@ class World {
         var maxX: Int = 0
         var maxY: Int = 0
 
-        fun update(City: City) {
-            if (City.position.x < minX) {
-                minX = City.position.x.roundToInt()
+        fun update(Location: AbstractLocation) {
+            if (Location.position.x < minX) {
+                minX = Location.position.x.roundToInt()
             }
-            if (City.position.y < minY) {
-                minY = City.position.y.roundToInt()
+            if (Location.position.y < minY) {
+                minY = Location.position.y.roundToInt()
             }
-            if (City.position.x > maxX) {
-                maxX = City.position.x.roundToInt()
+            if (Location.position.x > maxX) {
+                maxX = Location.position.x.roundToInt()
             }
-            if (City.position.x > maxY) {
-                maxY = City.position.y.roundToInt()
+            if (Location.position.x > maxY) {
+                maxY = Location.position.y.roundToInt()
             }
         }
     }

@@ -4,11 +4,13 @@ object Configuration {
 
     var gameSpeed = 10f
 
+    var entityAccelerationRate = 10f
+
     var numberOfCities = 300
     var maxDistanceBetweenCities = 80
     var minDistanceBetweenCities = 50
-    var minCityPopulation = 100
-    var maxCityPopulation = 5000
+    var minLocationPopulation = 100
+    var maxLocationPopulation = 5000
     var maxRouteDistanceBetweenCities = 120
 
     var cityRatioGrowingPopulationConnected = 0.005f

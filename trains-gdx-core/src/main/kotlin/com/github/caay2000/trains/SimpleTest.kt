@@ -3,8 +3,8 @@ package com.github.caay2000.trains
 import com.github.caay2000.trains.render.WorldRender
 import com.github.caay2000.trains.world.GlobalData
 import com.github.caay2000.trains.world.World
-import com.github.caay2000.trains.world.entity.TrainEventHandler
-import com.github.caay2000.trains.world.entity.TrainEventProcessor
+// import com.github.caay2000.trains.world.object.entity.TrainEventHandler
+// import com.github.caay2000.trains.world.object.entity.TrainEventProcessor
 import com.github.caay2000.trains.world.generator.WorldGenerator
 import ktx.app.KtxApplicationAdapter
 
@@ -17,7 +17,7 @@ class SimpleTest : KtxApplicationAdapter {
 
         Configuration.numberOfCities = 2
 
-        TrainEventHandler(TrainEventProcessor())
+        // TrainEventHandler(TrainEventProcessor())
         // Gdx.app.logLevel = Application.LOG_DEBUG
 
         world = WorldGenerator.generate()

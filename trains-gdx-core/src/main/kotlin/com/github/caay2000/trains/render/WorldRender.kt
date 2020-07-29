@@ -48,10 +48,10 @@ class WorldRender {
         for (company in world.companies()) {
             for (route in company.routes()) {
                 shapeRenderer.line(
-                    route.start.position.x + xOffset(world),
-                    route.start.position.y + yOffset(world),
-                    route.end.position.x + xOffset(world),
-                    route.end.position.y + yOffset(world)
+                    route.cities[0].position.x + xOffset(world),
+                    route.cities[0].position.y + yOffset(world),
+                    route.cities[1].position.x + xOffset(world),
+                    route.cities[1].position.y + yOffset(world)
                 )
             }
             shapeRenderer.color = Color.RED

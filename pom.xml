@@ -223,6 +223,11 @@
                             <param>**.*Configuration</param>
                             <param>**.configuration.**</param>
                         </excludedClasses>
+                        <avoidCallsTo>
+                            <avoidCallsTo>
+                                kotlin.jvm.internal
+                            </avoidCallsTo>
+                        </avoidCallsTo>
                         <mutationThreshold>0</mutationThreshold>
                         <coverageThreshold>0</coverageThreshold>
                         <outputFormats>
