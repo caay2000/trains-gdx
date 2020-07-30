@@ -17,7 +17,7 @@ class SimpleTest : KtxApplicationAdapter {
 
     override fun create() {
 
-        Configuration.numberOfCities = 3
+        Configuration.numberOfCities = 30
 
         // TrainEventHandler(TrainEventProcessor())
         //Gdx.app.logLevel = Application.LOG_DEBUG

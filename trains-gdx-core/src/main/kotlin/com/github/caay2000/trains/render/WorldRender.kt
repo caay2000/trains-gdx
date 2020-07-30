@@ -47,12 +47,16 @@ class WorldRender {
         }
         for (company in world.companies()) {
             for (route in company.routes()) {
-                shapeRenderer.line(
-                    route.cities[0].position.x + xOffset(world),
-                    route.cities[0].position.y + yOffset(world),
-                    route.cities[1].position.x + xOffset(world),
-                    route.cities[1].position.y + yOffset(world)
-                )
+                for(i in route.cities.withIndex())
+                    if(i.index != 0){
+                        shapeRenderer.line(
+                            route.cities[i.index-1].position.x + xOffset(world),
+                            route.cities[i.index-1].position.y + yOffset(world),
+                            route.cities[i.index].position.x + xOffset(world),
+                            route.cities[i.index].position.y + yOffset(world)
+                        )
+                    }
+
             }
             shapeRenderer.color = Color.RED
             for (train in company.entities()) {
