@@ -2,7 +2,7 @@ package com.github.caay2000.trains.world.`object`.location
 
 import com.github.caay2000.trains.world.`object`.entity.CargoType
 
-class Demand {
+internal class Demand {
 
     // constructor(vararg cargoType: CargoType) {
     //     for (type in cargoType) {

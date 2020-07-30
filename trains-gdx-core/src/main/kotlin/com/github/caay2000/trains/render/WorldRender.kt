@@ -25,7 +25,7 @@ class WorldRender {
     private var font = BitmapFont()
 
     fun render(world: World) {
-        debug { "Update delta: ${GlobalData.delta}, elapsed: ${GlobalData.current}" }
+        // debug { "Update delta: ${GlobalData.delta}, elapsed: ${GlobalData.current}" }
         worldPopulation = 0
         camera.update()
         Gdx.gl.glClearColor(1f, 1f, 1f, 1f)

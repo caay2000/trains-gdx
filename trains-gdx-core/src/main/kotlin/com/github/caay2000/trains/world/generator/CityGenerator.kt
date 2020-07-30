@@ -1,9 +1,10 @@
 package com.github.caay2000.trains.world.generator
 
 import com.github.caay2000.trains.Configuration
+import com.github.caay2000.trains.world.`object`.entity.CargoType
 import com.github.caay2000.trains.world.`object`.location.AbstractLocation
-import com.github.caay2000.trains.world.position.Position
 import com.github.caay2000.trains.world.`object`.location.city.City
+import com.github.caay2000.trains.world.position.Position
 
 object LocationGenerator {
 
@@ -13,7 +14,10 @@ object LocationGenerator {
             return generateLocation(existingCities, configuration)
         }
         val name = NameGenerator.generate()
-        return City(position, name, randomPopulation())
+        val city = City(position, name, randomPopulation())
+
+        city.addDemand(CargoType.PAX)
+        return city
     }
 
     private fun randomPosition(

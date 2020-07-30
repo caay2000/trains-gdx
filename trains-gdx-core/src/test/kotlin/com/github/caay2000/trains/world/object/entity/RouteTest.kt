@@ -30,6 +30,15 @@ class RouteTest {
     }
 
     @Test
+    fun `nextStop works ok at end of line`() {
+        val start = randomLocation()
+        val next = randomLocation()
+        val sut = Route(start, next)
+        sut.update()
+        assertThat(sut.nextStop()).isEqualTo(start)
+    }
+
+    @Test
     fun `nextStop works twice`() {
         val start = randomLocation()
         val next = randomLocation()
@@ -59,5 +68,55 @@ class RouteTest {
         sut.update()
 
         assertThat(sut.nextStop()).isEqualTo(following)
+    }
+
+    @Test
+    fun `remainingStops work ok`() {
+        val a = randomLocation()
+        val b = randomLocation()
+        val c = randomLocation()
+        val d = randomLocation()
+
+        val sut = Route(a, b, c, d)
+        sut.update()
+        assertThat(sut.remainingStops()).containsOnly(c, d, a)
+    }
+
+    @Test
+    fun `remainingStops work ok on circular line`() {
+        val a = randomLocation()
+        val b = randomLocation()
+        val c = randomLocation()
+        val d = randomLocation()
+
+        val sut = Route(a, b, c, d, c, b)
+        sut.update()
+        assertThat(sut.remainingStops()).containsOnly(c, d)
+    }
+
+    @Test
+    fun `remainingStops work ok at endOfLine`() {
+        val a = randomLocation()
+        val b = randomLocation()
+        val c = randomLocation()
+        val d = randomLocation()
+
+        val sut = Route(a, b, c, d)
+        sut.update()
+        sut.update()
+        sut.update()
+        assertThat(sut.remainingStops()).containsOnly(a, b, c)
+    }
+
+    @Test
+    fun `remainingStops work ok for 2 stops line`() {
+        val a = randomLocation()
+        val b = randomLocation()
+
+        val sut = Route(a, b)
+        assertThat(sut.remainingStops()).containsOnly(b)
+
+        sut.update()
+        assertThat(sut.remainingStops()).containsOnly(a)
     }
 }

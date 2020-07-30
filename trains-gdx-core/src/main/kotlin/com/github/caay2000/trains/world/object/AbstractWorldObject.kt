@@ -4,5 +4,5 @@ import java.util.UUID
 
 abstract class AbstractWorldObject : WorldObject {
 
-    override val id: UUID = UUID.randomUUID()
+    final override val id: UUID = UUID.randomUUID()
 }

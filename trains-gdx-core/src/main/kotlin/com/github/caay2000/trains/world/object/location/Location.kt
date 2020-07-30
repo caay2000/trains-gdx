@@ -23,4 +23,8 @@ interface Location : WorldObject {
     fun unloadCargo(type: CargoType, load: Int)
     fun unloadedCargo(type: CargoType): Int
     fun consumeDemand(type: CargoType, load: Int): Boolean
+
+    fun produces(): Map<CargoType, Int>
+    fun increaseProduction(type: CargoType, load: Int)
+    fun consumeProduction(type: CargoType, load: Int): Int
 }

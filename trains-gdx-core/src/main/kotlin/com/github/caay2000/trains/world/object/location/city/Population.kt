@@ -21,12 +21,11 @@ internal class Population {
 
     fun update(delta: Float) {
         // val deliveredCargoGrow = city.consumption.growPopulation()
-        // populationDelta += delta * cityGrowingRatio() + deliveredCargoGrow
+        populationDelta += delta * cityGrowingRatio()
         val grow = this.populationDelta.toInt()
         this.population += grow
         this.populationDelta -= this.populationDelta.toInt()
-
-        debug(grow > 0) { "POPULATION ${city.name}[${city.id}] increased by $grow to $population" }
+        // debug(grow > 0) { "POPULATION ${city.name}[${city.id}] increased by $grow to $population" }
     }
 
     private fun cityGrowingRatio() =

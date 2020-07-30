@@ -1,5 +1,6 @@
 package com.github.caay2000.trains.world.`object`.entity.strategy
 
+import com.github.caay2000.trains.info
 import com.github.caay2000.trains.world.`object`.entity.Entity
 
 class MoveStrategy(private val entity: Entity) {

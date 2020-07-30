@@ -1,11 +1,11 @@
 package com.github.caay2000.trains.world.`object`.entity
 
-import com.github.caay2000.trains.world.position.Position
 import com.github.caay2000.trains.world.`object`.WorldObject
 import com.github.caay2000.trains.world.`object`.entity.Entity.EntityStatus.EntityStatusValue
 import com.github.caay2000.trains.world.`object`.entity.strategy.LoadStrategy
 import com.github.caay2000.trains.world.`object`.entity.strategy.MoveStrategy
 import com.github.caay2000.trains.world.`object`.entity.strategy.UnloadStrategy
+import com.github.caay2000.trains.world.position.Position
 import java.util.UUID
 
 class Entity : WorldObject {
@@ -34,7 +34,9 @@ class Entity : WorldObject {
         val diffDelta = when (status.value) {
             EntityStatusValue.MOVING -> moveStrategy.update(delta)
             EntityStatusValue.UNLOADING -> unloadStrategy.update(delta)
-            EntityStatusValue.LOADING -> loadStrategy.update(delta)
+            EntityStatusValue.LOADING -> {
+                loadStrategy.update(delta).also { updateRoute(it) }
+            }
         }
         if (diffDelta > 0F) {
             status.next()
@@ -42,13 +44,10 @@ class Entity : WorldObject {
         }
     }
 
-    private fun unloadEntity(delta: Float): Float {
-        return delta
-    }
-
-    private fun loadEntity(delta: Float): Float {
-        route.update()
-        return delta
+    private fun updateRoute(it: Float) {
+        if (it != 0F) {
+            this.route.update()
+        }
     }
 
     override fun toString(): String {

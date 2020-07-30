@@ -9,6 +9,10 @@ class Wagon {
         this.model = model
         this.load
     }
+
+    override fun toString(): String {
+        return "Wagon(model=$model, load=$load)"
+    }
 }
 
 interface WagonType {

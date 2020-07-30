@@ -15,12 +15,26 @@ class Route(start: Location, next: Location, vararg stops: Location) {
 
     fun nextStop() = cities[nextStopInt()]
 
+    // TO IMPROVE
+    fun remainingStops(): Set<Location> {
+        val set = mutableSetOf<Location>()
+        var i = nextStopInt()
+        while (i != current) {
+            if (cities[i] == currentStop()) {
+                return set
+            }
+            set.add(cities[i])
+            i = nextStopInt(i)
+        }
+        return set
+    }
+
     fun update() {
         current = nextStopInt()
     }
 
-    private fun nextStopInt(): Int {
-        var next = current + 1
+    private fun nextStopInt(value: Int = current): Int {
+        var next = value + 1
         if (next >= cities.size) {
             next = 0
         }
