@@ -1,4 +1,4 @@
-package com.github.caay2000.trains.world.location
+package com.github.caay2000.trains.world.`object`.location.city
 
 import com.github.caay2000.trains.Configuration
 import com.github.caay2000.trains.debug
@@ -20,13 +20,12 @@ internal class Population {
     }
 
     fun update(delta: Float) {
-        val deliveredCargoGrow = city.consumption.growPopulation()
-        populationDelta += delta * cityGrowingRatio() + deliveredCargoGrow
+        // val deliveredCargoGrow = city.consumption.growPopulation()
+        populationDelta += delta * cityGrowingRatio()
         val grow = this.populationDelta.toInt()
         this.population += grow
         this.populationDelta -= this.populationDelta.toInt()
-
-        debug(grow > 0) { "POPULATION ${city.name}[${city.id}] increased by $grow to $population" }
+        // debug(grow > 0) { "POPULATION ${city.name}[${city.id}] increased by $grow to $population" }
     }
 
     private fun cityGrowingRatio() =

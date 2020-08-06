@@ -25,7 +25,7 @@ class WorldRender {
     private var font = BitmapFont()
 
     fun render(world: World) {
-        debug { "Update delta: ${GlobalData.delta}, elapsed: ${GlobalData.current}" }
+        // debug { "Update delta: ${GlobalData.delta}, elapsed: ${GlobalData.current}" }
         worldPopulation = 0
         camera.update()
         Gdx.gl.glClearColor(1f, 1f, 1f, 1f)
@@ -47,12 +47,16 @@ class WorldRender {
         }
         for (company in world.companies()) {
             for (route in company.routes()) {
-                shapeRenderer.line(
-                    route.start.position.x + xOffset(world),
-                    route.start.position.y + yOffset(world),
-                    route.end.position.x + xOffset(world),
-                    route.end.position.y + yOffset(world)
-                )
+                for(i in route.cities.withIndex())
+                    if(i.index != 0){
+                        shapeRenderer.line(
+                            route.cities[i.index-1].position.x + xOffset(world),
+                            route.cities[i.index-1].position.y + yOffset(world),
+                            route.cities[i.index].position.x + xOffset(world),
+                            route.cities[i.index].position.y + yOffset(world)
+                        )
+                    }
+
             }
             shapeRenderer.color = Color.RED
             for (train in company.entities()) {

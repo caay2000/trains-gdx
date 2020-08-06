@@ -1,8 +1,12 @@
 package com.github.caay2000.trains
 
+import com.badlogic.gdx.Application
+import com.badlogic.gdx.Gdx
 import com.github.caay2000.trains.render.WorldRender
 import com.github.caay2000.trains.world.GlobalData
 import com.github.caay2000.trains.world.World
+// import com.github.caay2000.trains.world.object.entity.TrainEventHandler
+// import com.github.caay2000.trains.world.object.entity.TrainEventProcessor
 import com.github.caay2000.trains.world.generator.WorldGenerator
 import ktx.app.KtxApplicationAdapter
 
@@ -13,8 +17,10 @@ class SimpleTest : KtxApplicationAdapter {
 
     override fun create() {
 
-        Configuration.numberOfCities = 50
-        // Gdx.app.logLevel = Application.LOG_DEBUG
+        Configuration.numberOfCities = 30
+
+        // TrainEventHandler(TrainEventProcessor())
+        //Gdx.app.logLevel = Application.LOG_DEBUG
 
         world = WorldGenerator.generate()
         worldRender = WorldRender()

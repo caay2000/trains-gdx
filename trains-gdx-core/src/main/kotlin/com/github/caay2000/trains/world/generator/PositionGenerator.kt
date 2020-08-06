@@ -1,6 +1,6 @@
 package com.github.caay2000.trains.world.generator
 
-import com.github.caay2000.trains.world.Position
+import com.github.caay2000.trains.world.position.Position
 
 object PositionGenerator {
 
@@ -26,8 +26,9 @@ object PositionGenerator {
         return this
     }
 
-    fun generate(): Position = Position(
-        ((x - maxDistance..x - minDistance) + (x + minDistance..x + maxDistance)).random(),
-        ((y - maxDistance..y - minDistance) + (y + minDistance..y + maxDistance)).random()
-    )
+    fun generate(): Position =
+        Position(
+            ((x - maxDistance..x - minDistance) + (x + minDistance..x + maxDistance)).random(),
+            ((y - maxDistance..y - minDistance) + (y + minDistance..y + maxDistance)).random()
+        )
 }
