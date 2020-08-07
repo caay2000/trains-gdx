@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
-import com.github.caay2000.trains.debug
 import com.github.caay2000.trains.world.GlobalData
 import com.github.caay2000.trains.world.World
 import kotlin.math.abs
@@ -46,17 +45,17 @@ class WorldRender {
             worldPopulation += city.size
         }
         for (company in world.companies()) {
+            shapeRenderer.color = company.companyColor.color
             for (route in company.routes()) {
-                for(i in route.cities.withIndex())
-                    if(i.index != 0){
+                for (i in route.cities.withIndex())
+                    if (i.index != 0) {
                         shapeRenderer.line(
-                            route.cities[i.index-1].position.x + xOffset(world),
-                            route.cities[i.index-1].position.y + yOffset(world),
+                            route.cities[i.index - 1].position.x + xOffset(world),
+                            route.cities[i.index - 1].position.y + yOffset(world),
                             route.cities[i.index].position.x + xOffset(world),
                             route.cities[i.index].position.y + yOffset(world)
                         )
                     }
-
             }
             shapeRenderer.color = Color.RED
             for (train in company.entities()) {

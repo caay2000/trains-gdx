@@ -9,6 +9,7 @@ import com.github.caay2000.trains.world.`object`.entity.Route
 import com.github.caay2000.trains.world.`object`.location.LocationSupport.randomLocation
 import com.github.caay2000.trains.world.`object`.location.LocationSupport.randomLocationWithDemands
 import com.github.caay2000.trains.world.`object`.location.LocationSupport.randomLocationWithProduction
+import com.github.caay2000.trains.world.company.Company
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
@@ -18,6 +19,7 @@ class LoadStrategyTest {
     fun `should not load anything if no wagon`() {
 
         val entity = Entity(
+            company = Company(),
             maxSpeed = 1F,
             route = Route(randomLocation(), randomLocation()),
             wagons = listOf()
@@ -33,6 +35,7 @@ class LoadStrategyTest {
 
         val stop = randomLocationWithProduction(listOf(Pair(PAX, 10)))
         val entity = Entity(
+            company = Company(),
             maxSpeed = 1F,
             route = Route(stop, randomLocation()),
             wagons = listOf(wagon(PAX_20_WAGON, 0))
@@ -50,6 +53,7 @@ class LoadStrategyTest {
 
         val stop = randomLocationWithProduction(listOf(Pair(PAX, 10)))
         val entity = Entity(
+            company = Company(),
             maxSpeed = 1F,
             route = Route(stop, randomLocationWithDemands(PAX)),
             wagons = listOf(wagon(PAX_20_WAGON, 0))
@@ -67,6 +71,7 @@ class LoadStrategyTest {
 
         val stop = randomLocationWithProduction(listOf(Pair(PAX, 100)))
         val entity = Entity(
+            company = Company(),
             maxSpeed = 1F,
             route = Route(stop, randomLocationWithDemands(PAX)),
             wagons = listOf(wagon(PAX_20_WAGON, 0), wagon(PAX_20_WAGON_SLOW, 0))
@@ -84,6 +89,7 @@ class LoadStrategyTest {
 
         val stop = randomLocationWithProduction(listOf(Pair(PAX, 20)))
         val entity = Entity(
+            company = Company(),
             maxSpeed = 1F,
             route = Route(stop, randomLocationWithDemands(PAX)),
             wagons = listOf(wagon(PAX_20_WAGON, 0), wagon(PAX_20_WAGON_SLOW, 0))
@@ -101,6 +107,7 @@ class LoadStrategyTest {
 
         val stop = randomLocationWithProduction(listOf(Pair(PAX, 40)))
         val entity = Entity(
+            company = Company(),
             maxSpeed = 1F,
             route = Route(stop, randomLocationWithDemands(PAX)),
             wagons = listOf(wagon(PAX_20_WAGON, 0), wagon(PAX_20_WAGON_SLOW, 0))
@@ -118,6 +125,7 @@ class LoadStrategyTest {
 
         val stop = randomLocationWithProduction(listOf(Pair(PAX, 40)))
         val entity = Entity(
+            company = Company(),
             maxSpeed = 1F,
             route = Route(stop, randomLocationWithDemands(PAX)),
             wagons = listOf(wagon(PAX_20_WAGON, 10), wagon(PAX_20_WAGON_SLOW, 20))

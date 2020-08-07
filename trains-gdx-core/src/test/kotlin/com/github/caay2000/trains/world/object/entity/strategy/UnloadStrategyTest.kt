@@ -8,6 +8,7 @@ import com.github.caay2000.trains.world.`object`.entity.EntitySupport.wagon
 import com.github.caay2000.trains.world.`object`.entity.Route
 import com.github.caay2000.trains.world.`object`.location.LocationSupport.randomLocation
 import com.github.caay2000.trains.world.`object`.location.LocationSupport.randomLocationWithDemands
+import com.github.caay2000.trains.world.company.Company
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
@@ -17,6 +18,7 @@ class UnloadStrategyTest {
     fun `should do nothing if no cargo`() {
         val stop = randomLocation()
         val entity = Entity(
+            company = Company(),
             maxSpeed = 1F,
             route = Route(stop, randomLocation()),
             wagons = listOf(wagon(PAX_20_WAGON, 0))
@@ -32,6 +34,7 @@ class UnloadStrategyTest {
 
         val stop = randomLocation()
         val entity = Entity(
+            company = Company(),
             maxSpeed = 1F,
             route = Route(stop, randomLocation()),
             wagons = listOf(wagon(PAX_20_WAGON, 20))
@@ -49,6 +52,7 @@ class UnloadStrategyTest {
 
         val stop = randomLocationWithDemands(PAX)
         val entity = Entity(
+            company = Company(),
             maxSpeed = 1F,
             route = Route(stop, randomLocationWithDemands(PAX)),
             wagons = listOf(wagon(PAX_20_WAGON, 20))
@@ -66,6 +70,7 @@ class UnloadStrategyTest {
 
         val stop = randomLocationWithDemands(PAX)
         val entity = Entity(
+            company = Company(),
             maxSpeed = 1F,
             route = Route(stop, randomLocationWithDemands(PAX)),
             wagons = listOf(wagon(PAX_20_WAGON, 20))
@@ -83,6 +88,7 @@ class UnloadStrategyTest {
 
         val stop = randomLocationWithDemands(PAX)
         val entity = Entity(
+            company = Company(),
             maxSpeed = 1F,
             route = Route(stop, randomLocationWithDemands(PAX)),
             wagons = listOf(wagon(PAX_20_WAGON, 20), wagon(PAX_20_WAGON_SLOW, 20), wagon(PAX_20_WAGON, 0))
@@ -101,6 +107,7 @@ class UnloadStrategyTest {
 
         val stop = randomLocationWithDemands(PAX)
         val entity = Entity(
+            company = Company(),
             maxSpeed = 1F,
             route = Route(stop, randomLocationWithDemands(PAX)),
             wagons = listOf(wagon(PAX_20_WAGON, 10), wagon(PAX_20_WAGON_SLOW, 5))

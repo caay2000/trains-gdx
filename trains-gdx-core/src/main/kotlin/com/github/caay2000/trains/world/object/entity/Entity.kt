@@ -5,6 +5,7 @@ import com.github.caay2000.trains.world.`object`.entity.Entity.EntityStatus.Enti
 import com.github.caay2000.trains.world.`object`.entity.strategy.LoadStrategy
 import com.github.caay2000.trains.world.`object`.entity.strategy.MoveStrategy
 import com.github.caay2000.trains.world.`object`.entity.strategy.UnloadStrategy
+import com.github.caay2000.trains.world.company.Company
 import com.github.caay2000.trains.world.position.Position
 import java.util.UUID
 
@@ -12,6 +13,7 @@ class Entity : WorldObject {
 
     override val id: UUID = UUID.randomUUID()
 
+    val company: Company
     val maxSpeed: Float
     val route: Route
     val position: Position
@@ -22,7 +24,8 @@ class Entity : WorldObject {
     private val loadStrategy = LoadStrategy(this)
     private val unloadStrategy = UnloadStrategy(this)
 
-    constructor(maxSpeed: Float, route: Route, wagons: List<Wagon> = mutableListOf()) {
+    constructor(company: Company, maxSpeed: Float, route: Route, wagons: List<Wagon>) {
+        this.company = company
         this.maxSpeed = maxSpeed
         this.route = route
         this.wagons = wagons

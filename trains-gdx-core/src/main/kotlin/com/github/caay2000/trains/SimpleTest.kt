@@ -1,12 +1,11 @@
 package com.github.caay2000.trains
 
-import com.badlogic.gdx.Application
-import com.badlogic.gdx.Gdx
+// import com.github.caay2000.trains.world.object.entity.TrainEventHandler
+// import com.github.caay2000.trains.world.object.entity.TrainEventProcessor
 import com.github.caay2000.trains.render.WorldRender
 import com.github.caay2000.trains.world.GlobalData
 import com.github.caay2000.trains.world.World
-// import com.github.caay2000.trains.world.object.entity.TrainEventHandler
-// import com.github.caay2000.trains.world.object.entity.TrainEventProcessor
+import com.github.caay2000.trains.world.company.Company
 import com.github.caay2000.trains.world.generator.WorldGenerator
 import ktx.app.KtxApplicationAdapter
 
@@ -24,6 +23,11 @@ class SimpleTest : KtxApplicationAdapter {
 
         world = WorldGenerator.generate()
         worldRender = WorldRender()
+        for (i in 1..Configuration.numberOfCompanies) {
+            world.addCompany(Company(CompanyColors.valueOf(i)))
+        }
+
+        GlobalData.world = world
     }
 
     override fun resize(i: Int, i1: Int) {}

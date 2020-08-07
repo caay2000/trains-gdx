@@ -2,6 +2,7 @@ package com.github.caay2000.trains
 
 object Configuration {
 
+    val numberOfCompanies = 3
     var gameSpeed = 10f
 
     var entityAccelerationRate = 10f
@@ -21,4 +22,7 @@ object Configuration {
     var cityDeliveredCargoPopulationGrowRate = 0.2
 
     var stationStopTime = 2f
+
+    var companyStartingBalance = 10000
+    var companyMinBalanceForNewRoute = 8000
 }

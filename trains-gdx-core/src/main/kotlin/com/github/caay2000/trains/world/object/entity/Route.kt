@@ -4,13 +4,30 @@ import com.github.caay2000.trains.world.`object`.location.Location
 import kotlin.math.max
 import kotlin.math.min
 
-class Route(start: Location, next: Location, vararg stops: Location) {
+class Route {
 
-    val cities = mutableListOf(start, next, *stops)
+    constructor(start: Location, next: Location, vararg stops: Location) {
+        this.cities = mutableListOf(start, next, *stops)
+
+        // TODO IMPROVE THIS
+        for (x in cities) {
+            for (y in cities) {
+                x.addConnection(y)
+                y.addConnection(x)
+            }
+        }
+    }
+
+    val cities: MutableList<Location>
     private var current = 0
     private var forward: Boolean = true
 
     fun addStop(stop: Location) {
+
+        for (i in cities) {
+            stop.addConnection(i)
+            i.addConnection(stop)
+        }
         this.cities.add(stop)
     }
 

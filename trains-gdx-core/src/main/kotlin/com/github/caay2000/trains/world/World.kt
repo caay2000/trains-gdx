@@ -1,10 +1,9 @@
 package com.github.caay2000.trains.world
 
 import com.github.caay2000.trains.Configuration
-import com.github.caay2000.trains.world.company.Company
-import com.github.caay2000.trains.world.generator.StubSimulation
-import com.github.caay2000.trains.world.`object`.location.city.City
 import com.github.caay2000.trains.world.`object`.location.AbstractLocation
+import com.github.caay2000.trains.world.`object`.location.city.City
+import com.github.caay2000.trains.world.company.Company
 import kotlin.math.roundToInt
 
 class World {
@@ -32,11 +31,6 @@ class World {
     fun update() {
         this.companies.forEach { it.update(GlobalData.delta) }
         this.locations.forEach { it.update(GlobalData.delta) }
-        testUpdate()
-    }
-
-    private fun testUpdate() {
-        StubSimulation.stubSimulationUpdate(this)
     }
 
     class Builder {
