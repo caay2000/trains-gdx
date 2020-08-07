@@ -50,8 +50,6 @@ object StubSimulation {
         next.addConnection(end)
         end.addConnection(next)
 
-        route.addStop(end)
-
         return route
     }
 }

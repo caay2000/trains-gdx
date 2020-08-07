@@ -79,18 +79,6 @@ class RouteTest {
 
         val sut = Route(a, b, c, d)
         sut.update()
-        assertThat(sut.remainingStops()).containsOnly(c, d, a)
-    }
-
-    @Test
-    fun `remainingStops work ok on circular line`() {
-        val a = randomLocation()
-        val b = randomLocation()
-        val c = randomLocation()
-        val d = randomLocation()
-
-        val sut = Route(a, b, c, d, c, b)
-        sut.update()
         assertThat(sut.remainingStops()).containsOnly(c, d)
     }
 
