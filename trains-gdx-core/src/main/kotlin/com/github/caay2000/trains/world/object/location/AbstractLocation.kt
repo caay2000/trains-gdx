@@ -25,5 +25,4 @@ abstract class AbstractLocation(
     final override fun produces() = offer.map()
     final override fun increaseProduction(type: CargoType, load: Int) = offer.add(type, load)
     final override fun consumeProduction(type: CargoType, load: Int) = offer.consume(type, load)
-
 }

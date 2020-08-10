@@ -16,7 +16,7 @@ object LocationSupport {
 
     fun randomLocationWithProduction(production: List<Pair<CargoType, Int>>): Location {
         val sut = TestLocation(randomPosition())
-        production.forEach{ sut.increaseProduction(it.first, it.second) }
+        production.forEach { sut.increaseProduction(it.first, it.second) }
         return sut
     }
 

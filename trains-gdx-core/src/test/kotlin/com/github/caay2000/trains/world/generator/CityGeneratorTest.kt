@@ -1,8 +1,8 @@
 package com.github.caay2000.trains.world.generator
 
 import com.github.caay2000.trains.Configuration
-import com.github.caay2000.trains.world.position.Position
 import com.github.caay2000.trains.world.`object`.location.city.City
+import com.github.caay2000.trains.world.position.Position
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 

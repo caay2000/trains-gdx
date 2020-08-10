@@ -33,8 +33,6 @@ class PositionTest {
         Assertions.assertThat(sut).isEqualTo(Position(10, 0))
     }
 
-
-
     // @Test
     // public void moveToLessDistance() {
     //
