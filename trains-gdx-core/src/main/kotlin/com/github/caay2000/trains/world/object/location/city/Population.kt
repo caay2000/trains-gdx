@@ -1,13 +1,15 @@
 package com.github.caay2000.trains.world.`object`.location.city
 
 import com.github.caay2000.trains.Configuration
-import com.github.caay2000.trains.debug
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 internal class Population {
 
+    private val logger: Logger = LoggerFactory.getLogger(Population::class.java)
+
     private val city: City
-    var population: Int
-        private set
+    var population: Int private set
 
     private var populationDelta: Float = (1..1000).random().toFloat().div(1000)
 
@@ -25,7 +27,9 @@ internal class Population {
         val grow = this.populationDelta.toInt()
         this.population += grow
         this.populationDelta -= this.populationDelta.toInt()
-        // debug(grow > 0) { "POPULATION ${city.name}[${city.id}] increased by $grow to $population" }
+        if (grow > 0) {
+            logger.info("POPULATION ${city.name}[${city.id}] increased by $grow to $population")
+        }
     }
 
     private fun cityGrowingRatio() =

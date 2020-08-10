@@ -15,7 +15,9 @@ class NewRouteStrategy(private val company: Company) {
 
     fun createNewRoute() {
         val startLocation = randomLocation()
-        val possibleRoutes = startLocation.locationsInRange.subtract(this.company.connectedCities)
+        val possibleRoutes = startLocation.locationsInRange
+            .subtract(this.company.connectedCities)
+            .filter { e -> !e.connections.contains(startLocation) }
         if (possibleRoutes.isNotEmpty()) {
             val selectedLocation = possibleRoutes.random()
             val route = Route(startLocation, selectedLocation)

@@ -224,9 +224,11 @@
                             <param>**.configuration.**</param>
                         </excludedClasses>
                         <avoidCallsTo>
-                            <avoidCallsTo>
-                                kotlin.jvm.internal
-                            </avoidCallsTo>
+                            <avoidCallsTo>java.util.logging</avoidCallsTo>
+                            <avoidCallsTo>org.apache.log4j</avoidCallsTo>
+                            <avoidCallsTo>org.slf4j</avoidCallsTo>
+                            <avoidCallsTo>org.apache.commons.logging</avoidCallsTo>
+                            <avoidCallsTo>kotlin.jvm.internal</avoidCallsTo>
                         </avoidCallsTo>
                         <mutationThreshold>0</mutationThreshold>
                         <coverageThreshold>0</coverageThreshold>

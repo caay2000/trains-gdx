@@ -1,18 +1,19 @@
 package com.github.caay2000.trains.world.`object`.entity.strategy
 
-import com.github.caay2000.trains.debug
 import com.github.caay2000.trains.world.`object`.entity.CargoType
 import com.github.caay2000.trains.world.`object`.entity.Entity
 import com.github.caay2000.trains.world.`object`.entity.Wagon
 import com.github.caay2000.trains.world.`object`.location.Location
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import kotlin.math.max
 import kotlin.math.min
 
 class LoadStrategy(private val entity: Entity) {
 
-    fun update(
-        delta: Float
-    ): Float {
+    private val logger: Logger = LoggerFactory.getLogger(LoadStrategy::class.java)
+
+    fun update(delta: Float): Float {
 
         var maxTimeLoading = delta
 
@@ -25,7 +26,7 @@ class LoadStrategy(private val entity: Entity) {
                 if (amountLoaded > 0) {
                     loadWagon(it, amountLoaded)
                     maxTimeLoading = min(maxTimeLoading, wagonLoadTime(delta, it, amountLoaded))
-                    // debug { "LOAD entity[${entity.id}] ${it.model.cargoType} loaded $amountLoaded, actual load in wagon ${it.load}" }
+                    logger.info("LOAD entity[${entity.id}] ${it.model.cargoType} loaded $amountLoaded, actual load in wagon ${it.load}")
                 }
             }
         return max(maxTimeLoading, 0f)

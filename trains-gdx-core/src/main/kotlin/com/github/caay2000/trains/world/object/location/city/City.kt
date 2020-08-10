@@ -1,12 +1,15 @@
 package com.github.caay2000.trains.world.`object`.location.city
 
 import com.github.caay2000.trains.Configuration.cityRatioPopulationPAX
-import com.github.caay2000.trains.debug
 import com.github.caay2000.trains.world.`object`.entity.CargoType
 import com.github.caay2000.trains.world.`object`.location.AbstractLocation
 import com.github.caay2000.trains.world.position.Position
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 class City : AbstractLocation {
+
+    private val logger: Logger = LoggerFactory.getLogger(City::class.java)
 
     val name: String
     private val population: Population
@@ -35,6 +38,8 @@ class City : AbstractLocation {
         this.productionDelta -= this.productionDelta.toInt()
         increaseProduction(CargoType.PAX, grow)
 
-        // debug(grow > 0) { "PRODUCTION PAX ${name}[${id}] increased by $grow to ${produces()[CargoType.PAX]}" }
+        if (grow > 0) {
+            logger.info("PRODUCTION PAX ${name}[${id}] increased by $grow to ${produces()[CargoType.PAX]}")
+        }
     }
 }
