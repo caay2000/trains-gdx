@@ -10,7 +10,7 @@
     <name>Trains GDX Parent</name>
 
     <properties>
-        <kotlin.version>1.3.72</kotlin.version>
+        <kotlin.version>1.6.0</kotlin.version>
 
         <jacoco.version>0.8.4</jacoco.version>
         <junit.version>4.12</junit.version>
